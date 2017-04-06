@@ -16,8 +16,7 @@ framework:
         resource: "%kernel.root_dir%/config/routing.yml"
         strict_requirements: ~
     form:            ~
-    csrf_protection:
-        enabled: true
+    csrf_protection: ~
     validation:      { enable_annotations: true }
     #serializer:      { enable_annotations: true }
     templating:
@@ -65,8 +64,8 @@ doctrine:
               AppBundle:
                     type: annotation
                     is_bundle: false
-                    dir:   %kernel.root_dir%/../src/Domain/Entity
-                    prefix: Domain\Entity
+                    dir:   %kernel.root_dir%/../src/Component/Domain/Entity
+                    prefix: Component\Domain\Entity
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -77,21 +76,13 @@ swiftmailer:
     spool:     { type: memory }
 
 #auth2scope:               "email profile"
-hwi_oauth:
-    firewall_names: [main]
-    resource_owners:
-        google:
-            type:                google
-            client_id:           363289470479-n7ep45c0gk9fljl352u3jedgc9gsu3rj.apps.googleusercontent.com
-            client_secret:       d_nYwmhk20zDN4wO_iqHYxtR
-            scope:               "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
+#hwi_oauth:
+#    firewall_names: [main]
+#    resource_owners:
+#        google:
+#            type:                google
+#            client_id:           363289470479-n7ep45c0gk9fljl352u3jedgc9gsu3rj.apps.googleusercontent.com
+#            client_secret:       d_nYwmhk20zDN4wO_iqHYxtR
+#            scope:               "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
 
 
-fos_user:
-
-    db_driver: orm
-    firewall_name: main
-    user_class: Domain\Entity\User
-    from_email:
-            address: "idrigan@gmail.com"
-            sender_name: "No Reply"
