@@ -108,11 +108,15 @@ class LoginController extends Controller
 
         if ( count($data) == 0 ){
             $user->setEmail($email);
+            $user->setNick("");
+        }else{
+            $data = $data[0];
+            $user = $data;
         }
+
         $date = new DateTime();
         $date->format("Y-m-d H:i:s");
         $user->setLastConnect($date);
-        $user->setNick("");
 
         $this->saveUser($user);
 
