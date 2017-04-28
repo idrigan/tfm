@@ -34,7 +34,7 @@ class LoginController extends Controller
         $auth_url = $this->client->createAuthUrl();
 
         // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
+        return $this->render('default/login.html.twig', [
                 'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
                 'auth_url' => $auth_url]
         );
@@ -66,11 +66,16 @@ class LoginController extends Controller
 
             $this->updateUser($infoUser->getEmail());
 
+            $user = $this->getUserByEmail($infoUser->getEmail());
+
+
+
             $dataUser = array(
                 'email' => $infoUser->getEmail(),
                 'name' => $infoUser->getName(),
                 'picture' => $infoUser->getPicture(),
-                'locale' => $infoUser->getLocale()
+                'locale' => $infoUser->getLocale(),
+                'id' => $user->getId()
             );
 
             $this->session->set('user', $dataUser);
@@ -102,15 +107,13 @@ class LoginController extends Controller
     private function updateUser($email){
 
         $user = new User();
-        $useCase = $this->get('app.user.usecase.getuser');
 
-        $data =  $useCase->execute($email);
+        $data = $this->getUserByEmail($email);
 
         if ( count($data) == 0 ){
             $user->setEmail($email);
             $user->setNick("");
         }else{
-            $data = $data[0];
             $user = $data;
         }
 
@@ -118,7 +121,7 @@ class LoginController extends Controller
         $date->format("Y-m-d H:i:s");
         $user->setLastConnect($date);
 
-        $this->saveUser($user);
+       return $this->saveUser($user);
 
     }
 
@@ -130,5 +133,17 @@ class LoginController extends Controller
         $useCase = $this->get('app.user.usecase.createuser');
         $useCase->execute($user);
         $this->em->flush();
+    }
+
+    private function getUserByEmail($email){
+        if (empty($email)){
+            return FALSE;
+        }
+
+        $useCase = $this->get('app.user.usecase.getuser');
+
+        $user = $useCase->execute($email);
+
+        return $user[0];
     }
 }

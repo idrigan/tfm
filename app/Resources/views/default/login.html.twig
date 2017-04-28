@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+        <div class="container-fluid site-wrapper login-form">
+            <div class="site-wrapper-inner">
+                <div class="col-md-12 col-xs-12 text-center " id="div-loggin" style="position: relative;border:1px solid gray;border-radius:30px;height:300px;line-height:270px;padding: 15px;background-color: white;margin:0 auto;;">
+
+                        <div class="col-md-12 " style="height: 100%;">
+                            <a href=" {{ auth_url }}">
+                                <img src="/images/google_sigin.png" alt="tfm - google in" title="Login Google" width="100%">
+                            </a>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+
+    <footer>
+
+    </footer>
+
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}

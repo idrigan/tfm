@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  *
- *  @ORM\Entity(repositoryClass="AppBundle\OAuthBundle\Repository\UserRepository")
+ *  @ORM\Entity(repositoryClass="AppBundle\Repository\User\UserRepositoryImpl")
  *  @ORM\Table(name="user")
  */
 class User
@@ -19,7 +19,6 @@ class User
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
 
 
     /**
@@ -44,6 +43,10 @@ class User
      */
     public function __construct (){
 
+    }
+
+    public function getId(){
+        return $this->id;
     }
 
     public function setNick($nick){
