@@ -1,22 +1,27 @@
 login:
-    defaults: { _controller: \AppBundle\Controller\LoginController::execute }
-    path: /
-    methods: [GET]
-
-google_login:
-     path: /login/check-google
-     defaults: { _controller: \AppBundle\Controller\LoginController::responseGoogle }
-
-
+    resource: "@LoginBundle/Resources/config/routing.yml"
+    prefix: /
 
 home:
-    path: /home
-    defaults: { _controller: \AppBundle\Controller\HomeController::execute }
+    resource: "@AppBundle/Resources/config/routing.yml"
+    prefix: /
 
 
-logout:
-  path: /logout
-  defaults: { _controller: \AppBundle\Controller\LogoutController::execute }
+#login:
+#    defaults: { _controller: \AppBundle\Controller\LoginController::execute }
+#    path: /
+#    methods: [GET]
+#
+#google_login:
+#     path: /login/check-google
+#     defaults: { _controller: \AppBundle\Controller\LoginController::responseGoogle }
+#
+
+
+#
+#logout:
+#  path: /logout
+#  defaults: { _controller: \AppBundle\Controller\LogoutController::execute }
 
 
 profile:

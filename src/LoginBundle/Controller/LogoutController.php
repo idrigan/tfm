@@ -1,23 +1,17 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace LoginBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class LogoutController extends Controller
 {
 
-    private $session;
-
-    public function __construct()
+    public function execute(Request $request)
     {
-        $this->session = new Session();
-    }
-
-    public function execute()
-    {
-        $this->session->clear();
+        $request->getSession()->clear();
         return $this->redirect('/');
     }
 }

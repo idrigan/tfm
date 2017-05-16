@@ -7,7 +7,7 @@ namespace Component\Application\User\UseCases;
 use Component\Domain\Entity\User;
 use Component\Domain\Repository\UserRepository;
 
-class CreateUserUseCase
+class CreateUpdateUserUseCase
 {
     private $repository;
 
@@ -17,8 +17,6 @@ class CreateUserUseCase
     }
 
     public function execute(User $user){
-
-
 
         $this->repository->createUser($user);
     }

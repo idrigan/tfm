@@ -1,0 +1,5 @@
+home:
+  defaults: { _controller: \AppBundle\Controller\HomeController::index }
+  path: /home
+  methods: [GET]
+

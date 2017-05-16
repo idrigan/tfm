@@ -1,0 +1,12 @@
+login:
+  defaults: { _controller: \LoginBundle\Controller\LoginController::index }
+  path: /
+  methods: [GET]
+
+google_login:
+  path: /login/check-google
+  defaults: { _controller: \LoginBundle\Controller\LoginController::response }
+
+logout:
+  path: /logout
+  defaults: { _controller: \LoginBundle\Controller\LogoutController::execute }

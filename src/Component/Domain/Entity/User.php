@@ -41,8 +41,9 @@ class User
     /**
      * User construct
      */
-    public function __construct (){
-
+    public function __construct ($email,$last_connect){
+        $this->email = $email;
+        $this->last_connect = $last_connect;
     }
 
     public function getId(){
@@ -59,5 +60,9 @@ class User
 
     public function setEmail($email){
         $this->email = $email;
+    }
+
+    public function getEmail(){
+        return $this->email;
     }
 }

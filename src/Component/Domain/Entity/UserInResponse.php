@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *  @ORM\Entity(repositoryClass="AppBundle\Repository\Publication\UserInResponseRepositoryImpl")
  *  @ORM\Table(name="user_in_response")
  */
-class user_in_response
+class UserInResponse
 {
     /**
      * @ORM\Column(type="integer")

@@ -5,22 +5,15 @@ namespace AppBundle\Controller;
 
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Request;
 
 class HomeController extends Controller
 {
-    private $session;
+    public function index(Request $request){
 
-    public function __construct()
-    {
-        $this->session = new Session();
-    }
+        $user = $request->getSession()->get('user');
 
-    public function execute(){
-
-        $user = $this->session->get('user');
-
-        return $this->render('default/home.html.twig', [
+        return $this->render('@AppBundle/Resources/views/home.html.twig', [
                 'user' => $user]
         );
     }

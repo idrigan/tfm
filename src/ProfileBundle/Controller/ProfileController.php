@@ -1,7 +1,7 @@
 <?php
 
 
-namespace AppBundle\Controller\Profile;
+namespace ProfileBundle\Controller;
 
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
