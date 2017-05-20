@@ -62,11 +62,11 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
         mappings:
-              AppBundle:
-                    type: annotation
+              LoginBundle:
+                    type: yml
                     is_bundle: false
-                    dir:   %kernel.root_dir%/../src/Component/Domain/Entity
-                    prefix: Component\Domain\Entity
+                    dir:   %kernel.root_dir%/../src/LoginBundle/Resources/config/doctrine
+                    prefix: LoginBundle\Resources\config\doctrine
 
 # Swiftmailer Configuration
 swiftmailer:

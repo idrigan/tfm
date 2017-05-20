@@ -1,5 +1,5 @@
 parameters:
-    client_secrets: %kernel.root_dir%../src/LoginBundle/client_secrets.json
+    client_secrets: %kernel.root_dir%/Resources/client_secrets.json
 
 services:
 
@@ -13,25 +13,32 @@ services:
 
 #USECASES
 #    #USER
-    app.user.usecase.createupdateuser:
-       class:  Component\Application\User\UseCases\CreateUpdateUserUseCase
+    app.user.usecase.createuser:
+       class:  Component\Application\User\UseCases\CreateUserUseCase
        arguments:
          userRepository: '@app.repository.user'
          entityManager:  '@doctrine.orm.entity_manager'
          dispatcher:     '@event_dispatcher'
+
+    app.user.usecase.updateuser:
+           class:  Component\Application\User\UseCases\UpdateUserUseCase
+           arguments:
+             userRepository: '@app.repository.user'
+             entityManager:  '@doctrine.orm.entity_manager'
+             dispatcher:     '@event_dispatcher'
 #
-#    app.user.usecase.getuser:
-#         class:  Component\Application\User\UseCases\GetUserUseCase
-#         arguments:
-#            userRepository: '@app.repository.user'
-#            entityManager:  '@doctrine.orm.entity_manager'
-#            dispatcher:     '@event_dispatcher'
+    app.user.usecase.getuser:
+         class:  Component\Application\User\UseCases\GetUserUseCase
+         arguments:
+            userRepository: '@app.repository.user'
+            entityManager:  '@doctrine.orm.entity_manager'
+            dispatcher:     '@event_dispatcher'
 #
 #
 #
 ##REPOSITORY
     app.repository.user:
-         class: AppBundle\Repository\User\UserRepositoryImpl
+         class: LoginBundle\Repository\UserRepositoryImpl
          arguments:
               em:   '@doctrine.orm.entity_manager'
               mapping: '@app.user.mentadata'

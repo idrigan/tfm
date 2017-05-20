@@ -6,6 +6,7 @@ namespace LoginBundle\Oauth;
 
 use Component\Application\Google\InterfaceGoogleAuth;
 use Component\Domain\DTO\UserDTO;
+use Exception;
 use Google_Client;
 use Google_Service_Logging;
 use Google_Service_Oauth2;
@@ -37,15 +38,20 @@ class GoogleOauth implements InterfaceGoogleAuth
     public function config()
     {
 
-        $this->client->setAuthConfig($this->rootDirClientSecrets);
+        try{
+            $this->client->setAuthConfig($this->rootDirClientSecrets);
 
-        $this->client->setAccessType("offline");
-        $this->client->setIncludeGrantedScopes(true);
-        $this->client->addScope(Google_Service_Logging::CLOUD_PLATFORM_READ_ONLY);
+            $this->client->setAccessType("offline");
+            $this->client->setIncludeGrantedScopes(true);
+            $this->client->addScope(Google_Service_Logging::CLOUD_PLATFORM_READ_ONLY);
 
-        $this->client->setScopes(array('https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile'));
+            $this->client->setScopes(array('https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile'));
 
-        $this->oauth = new Google_Service_Oauth2($this->client);
+            $this->oauth = new Google_Service_Oauth2($this->client);
+        }catch (Exception $e){
+           // echo $e->getMessage();
+
+        }
 
 
     }

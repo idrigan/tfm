@@ -18,5 +18,5 @@ services:
          class: Doctrine\ORM\Mapping\ClassMetadata
          factory_service:  doctrine
          factory_method:   getRepository
-         arguments:  [ Component\Domain\Entity\User ]
+         arguments:  [ LoginBundle\Resources\config\doctrine\User ]
 

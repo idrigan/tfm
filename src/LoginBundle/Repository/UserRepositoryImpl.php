@@ -1,9 +1,9 @@
 <?php
 
-namespace AppBundle\Repository\User;
+namespace LoginBundle\Repository;
 
 
-use Component\Domain\Entity\User;
+use LoginBundle\Resources\config\doctrine\User;
 
 use Component\Domain\Repository\UserRepository;
 use Doctrine\ORM\EntityRepository;
@@ -11,10 +11,9 @@ use Doctrine\ORM\EntityRepository;
 class UserRepositoryImpl extends EntityRepository implements UserRepository
 {
 
-    public function createUser(User $user)
+    public function create(User $user)
     {
         $this->getEntityManager()->persist($user);
-
     }
 
     public function getUser(String $email)
@@ -22,5 +21,17 @@ class UserRepositoryImpl extends EntityRepository implements UserRepository
         return $this->findBy(
             array('email' => $email)
         );
+    }
+
+    public function update($idUser,$nick,$date)
+    {
+
+        $user = $this->getById($idUser);
+        $user->setDateCreate($date);
+        return $user;
+    }
+
+    public function getById($idUser){
+        return $this->find($idUser);
     }
 }

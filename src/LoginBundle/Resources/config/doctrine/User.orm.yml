@@ -1,0 +1,30 @@
+LoginBundle\Resources\config\doctrine\User:
+    type: entity
+    table: user
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        email:
+            type: string
+            nullable: false
+            length: 200
+            options:
+                fixed: false
+        dateCreate:
+            type: datetime
+            nullable: false
+            column: date_create
+        username:
+            type: string
+            nullable: true
+            length: 45
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

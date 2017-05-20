@@ -3,7 +3,7 @@ namespace LoginBundle\Controller;
 
 use Component\Application\Google\InterfaceGoogleAuth;
 use Component\Domain\DTO\UserDTO;
-use Component\Domain\Entity\User;
+use LoginBundle\Resources\config\doctrine\User;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -64,13 +64,42 @@ class LoginController extends Controller
 
     private function createUpdateUser(UserDTO $userDTO)
     {
-        $userUseCase = $this->get('app.user.usecase.createupdateuser');
+        $getUserUseCase = $this->get('app.user.usecase.getuser');
+
+        $user = $getUserUseCase->execute($userDTO->getEmail());
+
+        $em = $this->getDoctrine()->getManager();
+
+        if (count($user) > 0){
+            $this->updateUser($user[0]);
+        }else{
+            $this->createUser($userDTO);
+        }
+
+        $em->flush();
+    }
+
+    private function updateUser(User $user){
+        $userUpdateCase = $this->get('app.user.usecase.updateuser');
+
 
         $date = new DateTime();
         $date->format("Y-m-d H:i:s");
-        $newUser = new User($userDTO->getEmail(),$date);
 
-        $userUseCase->execute($newUser);
+        $user->setDateCreate($date);
+
+        $userUpdateCase->execute($user);
     }
 
+    private function createUser(UserDTO $userDTO){
+        $userCreateCase = $this->get('app.user.usecase.createuser');
+
+        $date = new DateTime();
+        $date->format("Y-m-d H:i:s");
+
+        $user = new User($userDTO->getEmail(),$date);
+
+        $user = $userCreateCase->execute($user);
+
+    }
 }

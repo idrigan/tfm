@@ -4,10 +4,10 @@
 namespace Component\Application\User\UseCases;
 
 
-use Component\Domain\Entity\User;
+use LoginBundle\Resources\config\doctrine\User;
 use Component\Domain\Repository\UserRepository;
 
-class CreateUpdateUserUseCase
+class UpdateUserUseCase
 {
     private $repository;
 
@@ -16,8 +16,8 @@ class CreateUpdateUserUseCase
         $this->repository = $repository;
     }
 
-    public function execute(User $user){
-
-        $this->repository->createUser($user);
+    public function execute(User $user)
+    {
+        return $this->repository->update($user->getId(),'',$user->getDateCreate());
     }
 }
