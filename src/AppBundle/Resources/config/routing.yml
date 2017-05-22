@@ -1,3 +1,7 @@
+spotify-login:
+  path: /api/check-spotify
+  defaults: { _controller: \AppBundle\Controller\SpotifyController::responseAuthorize }
+
 home:
   defaults: { _controller: \AppBundle\Controller\HomeController::index }
   path: /home

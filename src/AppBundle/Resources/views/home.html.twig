@@ -8,13 +8,15 @@
 
 <main>
     <article class="container ">
-
+        {% block container %}
+            {% include 'AppBundle::container.html.twig' %}
+        {% endblock %}
     </article>
 </main>
 
-    <footer class="footer">
-
-    </footer>
+{% block footer %}
+    {% include 'AppBundle::footer.html.twig' %}
+{% endblock %}
 
 {% endblock %}
 

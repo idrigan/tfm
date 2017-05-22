@@ -82,7 +82,8 @@ class GoogleOauth implements InterfaceGoogleAuth
         }
 
         $user = $this->oauth->userinfo_v2_me->get();
-        return  new UserDTO($user->email, $user->givenname, $user->picture, $user->locale, $user->id);
+
+        return  new UserDTO($user->email, $user->givenName." ".$user->familyName, $user->picture, $user->locale, $user->id);
 
 
 

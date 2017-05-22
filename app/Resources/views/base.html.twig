@@ -10,6 +10,10 @@
             <link href="{{ asset('bundles/app/css/custom.css') }}" type="text/css"  rel="stylesheet" />
 
         {% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('bundles/app/vendor/jquery/jquery1.9.1.js') }}"></script>
+            <script src="{{ asset('bundles/app/vendor/bootstrap/js/bootstrap.js') }}"></script>
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
@@ -19,10 +23,6 @@
         {% block body %}
 
         {% endblock %}
-        {% block javascripts %}
-            <script src="{{ asset('bundles/app/vendor/jquery/jquery1.9.1.js') }}"></script>
-            <script src="{{ asset('bundles/app/vendor/bootstrap/js/bootstrap.js') }}"></script>
 
-        {% endblock %}
     </body>
 </html>
