@@ -4492,7 +4492,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 	};
 
 	// Always assume the presence of duplicates if sort doesn't
-	// pass them to our comparison function (as in Google Chrome).
+	// pass them to our comparison function (as in Oauth Chrome).
 	hasDuplicate = false;
 	[ 0, 0 ].sort( sortOrder );
 	support.detectDuplicates = hasDuplicate;

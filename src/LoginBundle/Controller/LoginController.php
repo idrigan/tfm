@@ -1,11 +1,13 @@
 <?php
 namespace LoginBundle\Controller;
 
-use Component\Application\Google\InterfaceGoogleAuth;
+
+use Component\Application\Oauth\InterfaceOAuth;
 use Component\Domain\DTO\UserDTO;
-use LoginBundle\Resources\config\doctrine\User;
-use DateTime;
+
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class LoginController extends Controller
@@ -35,69 +37,46 @@ class LoginController extends Controller
 
         $session = $request->getSession();
 
-        $session->set("user",$user);
         $session->set("token", $this->getToken($oauth));
 
-        $this->createUpdateUser($user);
+        $response = $this->createUpdateUser($user);
 
-        return $this->redirect("/home");
+        $message = $response->getMessage();
+
+        foreach ($message as $index => $value){
+            $session->set($index,$value);
+        }
+
+        return new RedirectResponse($response->getUrl());
 
     }
 
-    private function getAuthUrl(InterfaceGoogleAuth $interGoogleAuth)
+    private function getAuthUrl(InterfaceOAuth $interGoogleAuth)
     {
 
         return $interGoogleAuth->getUrl();
     }
 
-    private function authenticate(InterfaceGoogleAuth $interGoogleAuth, $response)
+    private function authenticate(InterfaceOAuth $interGoogleAuth, $response)
     {
         return $interGoogleAuth->authenticate($response);
     }
 
-    private function getToken(InterfaceGoogleAuth $interGoogleAuth)
+    private function getToken(InterfaceOAuth $interGoogleAuth)
     {
         return $interGoogleAuth->getToken();
     }
 
     private function createUpdateUser(UserDTO $userDTO)
     {
-        $getUserUseCase = $this->get('app.user.usecase.getuser');
+        $loginUseCase = $this->get('app.user.usecase.loginusecase');
 
-        $user = $getUserUseCase->execute($userDTO->getEmail());
+        return $loginUseCase->execute($userDTO);
 
-        $em = $this->getDoctrine()->getManager();
 
-        if (count($user) > 0){
-            $this->updateUser($user[0]);
-        }else{
-            $this->createUser($userDTO);
-        }
 
-        $em->flush();
+
     }
 
-    private function updateUser(User $user){
-        $userUpdateCase = $this->get('app.user.usecase.updateuser');
 
-
-        $date = new DateTime();
-        $date->format("Y-m-d H:i:s");
-
-        $user->setDateCreate($date);
-
-        $userUpdateCase->execute($user);
-    }
-
-    private function createUser(UserDTO $userDTO){
-        $userCreateCase = $this->get('app.user.usecase.createuser');
-
-        $date = new DateTime();
-        $date->format("Y-m-d H:i:s");
-
-        $user = new User($userDTO->getEmail(),$date);
-
-        $user = $userCreateCase->execute($user);
-
-    }
 }

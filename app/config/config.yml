@@ -3,6 +3,8 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: "@LoginBundle/Resources/config/services.yml"}
+    - { resource: "@AppBundle/Resources/config/parameters.yml"}
+    - { resource: "@AppBundle/Resources/config/services.yml"}
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -66,7 +68,7 @@ doctrine:
                     type: yml
                     is_bundle: false
                     dir:   %kernel.root_dir%/../src/LoginBundle/Resources/config/doctrine
-                    prefix: LoginBundle\Resources\config\doctrine
+                    prefix: Component\Domain\Entity
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -76,14 +78,6 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
-#auth2scope:               "email profile"
-#hwi_oauth:
-#    firewall_names: [main]
-#    resource_owners:
-#        google:
-#            type:                google
-#            client_id:           363289470479-n7ep45c0gk9fljl352u3jedgc9gsu3rj.apps.googleusercontent.com
-#            client_secret:       d_nYwmhk20zDN4wO_iqHYxtR
-#            scope:               "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
+
 
 

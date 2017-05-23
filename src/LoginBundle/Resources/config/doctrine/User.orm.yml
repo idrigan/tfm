@@ -1,6 +1,7 @@
-LoginBundle\Resources\config\doctrine\User:
+Component\Domain\Entity\User:
     type: entity
     table: user
+    repositoryClass: LoginBundle\Repository\UserRepositoryImpl
     id:
         id:
             type: integer
@@ -21,10 +22,10 @@ LoginBundle\Resources\config\doctrine\User:
             type: datetime
             nullable: false
             column: date_create
-        username:
+        nick:
             type: string
             nullable: true
-            length: 45
+            length: 200
             options:
                 fixed: false
     lifecycleCallbacks: {  }

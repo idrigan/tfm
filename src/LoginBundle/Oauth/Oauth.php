@@ -4,14 +4,14 @@
 namespace LoginBundle\Oauth;
 
 
-use Component\Application\Google\InterfaceGoogleAuth;
+use Component\Application\Oauth\InterfaceOAuth;
 use Component\Domain\DTO\UserDTO;
 use Exception;
 use Google_Client;
 use Google_Service_Logging;
 use Google_Service_Oauth2;
 
-class GoogleOauth implements InterfaceGoogleAuth
+class Oauth implements InterfaceOAuth
 {
 
     private $client;
@@ -33,6 +33,7 @@ class GoogleOauth implements InterfaceGoogleAuth
         $url = 'http://box.example.com:8000/login/check-google';
 
         $this->client->setRedirectUri($url);
+
     }
 
     public function config()

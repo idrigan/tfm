@@ -4,6 +4,7 @@
 namespace Component\Application\User\UseCases;
 
 
+use Component\Domain\DTO\UserDTO;
 use Component\Domain\Repository\UserRepository;
 
 class GetUserUseCase
@@ -15,7 +16,7 @@ class GetUserUseCase
         $this->repository = $repository;
     }
 
-    public function execute(String $email){
-        return $this->repository->getUser($email);
+    public function execute(UserDTO $user){
+        return $this->repository->getUser($user->getEmail());
     }
 }

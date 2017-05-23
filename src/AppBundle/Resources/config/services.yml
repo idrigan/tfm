@@ -1,11 +1,11 @@
-parameters:
-    client_secrets: %kernel.root_dir%/Resources/client_secrets.json
 
 services:
 
 #SPOTIFY
-    spotify:
-       class:  AppBundle\Spotify\Spotify
+    api.musical:
+       class:  AppBundle\Api\ApiMusical
+       arguments:
+          container: '@service_container'
 
 
 

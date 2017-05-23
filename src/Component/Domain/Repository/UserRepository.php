@@ -3,8 +3,7 @@
 
 namespace Component\Domain\Repository;
 
-
-use LoginBundle\Resources\config\doctrine\User;
+use Component\Domain\Entity\User;
 
 interface UserRepository
 {

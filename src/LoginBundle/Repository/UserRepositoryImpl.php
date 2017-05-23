@@ -3,8 +3,7 @@
 namespace LoginBundle\Repository;
 
 
-use LoginBundle\Resources\config\doctrine\User;
-
+use Component\Domain\Entity\User;
 use Component\Domain\Repository\UserRepository;
 use Doctrine\ORM\EntityRepository;
 

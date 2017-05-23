@@ -1,6 +1,6 @@
 <?php
 
-namespace LoginBundle\Resources\config\doctrine;
+namespace Component\Domain\Entity;
 
 /**
  * User
@@ -25,7 +25,7 @@ class User
     /**
      * @var string
      */
-    private $username;
+    private $nick;
 
 
     public function __construct($email,$dateCreate)
@@ -99,11 +99,10 @@ class User
      *
      * @return User
      */
-    public function setUsername($username)
+    public function setNick($nick)
     {
-        $this->username = $username;
+        $this->nick = $nick;
 
-        return $this;
     }
 
     /**
@@ -111,9 +110,9 @@ class User
      *
      * @return string
      */
-    public function getUsername()
+    public function getNick()
     {
-        return $this->username;
+        return $this->nick;
     }
 }
 

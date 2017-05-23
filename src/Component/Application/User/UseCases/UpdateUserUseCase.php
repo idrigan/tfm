@@ -4,7 +4,8 @@
 namespace Component\Application\User\UseCases;
 
 
-use LoginBundle\Resources\config\doctrine\User;
+
+use Component\Domain\DTO\UserDTO;
 use Component\Domain\Repository\UserRepository;
 
 class UpdateUserUseCase
@@ -16,8 +17,9 @@ class UpdateUserUseCase
         $this->repository = $repository;
     }
 
-    public function execute(User $user)
+    public function execute(UserDTO $userDTO)
     {
-        return $this->repository->update($user->getId(),'',$user->getDateCreate());
+
+        //return $this->repository->update($user->getId(),'',$user->getDateCreate());
     }
 }

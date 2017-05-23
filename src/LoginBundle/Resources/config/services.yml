@@ -5,7 +5,7 @@ services:
 
 #GOOGLE AUTH
     login.oauth:
-       class:  LoginBundle\Oauth\GoogleOauth
+       class:  LoginBundle\Oauth\Oauth
        arguments:
            rootDirClientSecrets: '%client_secrets%'
 
@@ -30,6 +30,13 @@ services:
     app.user.usecase.getuser:
          class:  Component\Application\User\UseCases\GetUserUseCase
          arguments:
+            userRepository: '@app.repository.user'
+            entityManager:  '@doctrine.orm.entity_manager'
+            dispatcher:     '@event_dispatcher'
+
+    app.user.usecase.loginusecase:
+        class: Component\Application\User\UseCases\LoginUseCase
+        arguments:
             userRepository: '@app.repository.user'
             entityManager:  '@doctrine.orm.entity_manager'
             dispatcher:     '@event_dispatcher'

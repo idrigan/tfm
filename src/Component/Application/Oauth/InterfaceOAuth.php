@@ -1,9 +1,9 @@
 <?php
 
-namespace Component\Application\Google;
+namespace Component\Application\Oauth;
 
 
-interface InterfaceGoogleAuth
+interface InterfaceOAuth
 {
     public function getUrl();
     public  function getInfoUser();

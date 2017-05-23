@@ -6,6 +6,7 @@ class UserDTO
 {
   private $email;
   private $name;
+  private $nick;
   private $picture;
   private $locale;
   private $id;
@@ -52,12 +53,29 @@ class UserDTO
         return $this->name;
     }
 
+
     /**
      * @param mixed $name
      */
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNick()
+    {
+        return $this->nick;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function setNick($nick)
+    {
+        $this->name = $nick;
     }
 
     /**
