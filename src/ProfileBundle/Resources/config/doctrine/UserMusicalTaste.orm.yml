@@ -1,0 +1,37 @@
+Component\Domain\Entity\UserMusicalTaste:
+    type: entity
+    table: user_musical_taste
+    indexes:
+        fk_user_musical_taste_user1_idx:
+            columns:
+                - id_user
+        fk_user_musical_taste_musical_taste1_idx:
+            columns:
+                - id_musical_taste
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    manyToOne:
+        idMusicalTaste:
+            targetEntity: MusicalTaste
+            cascade: {}
+            fetch: LAZY
+            joinColumns:
+                id_musical_taste:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idUser:
+            targetEntity: User
+            cascade: {  }
+            fetch: LAZY
+            joinColumns:
+                id_user:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

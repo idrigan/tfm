@@ -19,4 +19,8 @@ class GetUserUseCase
     public function execute(UserDTO $user){
         return $this->repository->getUser($user->getEmail());
     }
+
+    public function getById(UserDTO $user){
+        return $this->repository->getById($user->getId());
+    }
 }

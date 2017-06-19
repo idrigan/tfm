@@ -11,6 +11,14 @@ a:link
     color:white;
 }
 
+a:visited{
+    color:white;
+}
+
+a.active{
+    color:#0275d8;
+}
+
 header a:hover{
     color:#363636 !important;
 }
@@ -43,4 +51,21 @@ header a:hover{
 
 .nav > .nav-item > a:hover{
     color:black;
+}
+.bg-white{
+    background-color: white;
+}
+
+.bg-menu{
+    background-color:black;
+    opacity:0.8
+}
+.resultados {
+    border: 1px solid lightgray;
+    padding: 10px;
+}
+
+.row-result{
+    padding: 5px;
+    border-bottom: 2px solid;
 }

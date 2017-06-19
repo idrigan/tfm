@@ -1,4 +1,4 @@
 parameters:
     client_id: "af6985a4f9964c51b8f95483777fe44c"
     client_secret: "e3f007a7de8e487999d19b4ccf30c300"
-    url: "http://box.example.com:8000/login/check-spotify"
+    url: "http://box.example.com:8000/api/spotify/check-spotify"

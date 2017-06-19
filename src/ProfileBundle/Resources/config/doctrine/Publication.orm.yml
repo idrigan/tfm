@@ -1,0 +1,58 @@
+Component\Domain\Entity\Publication:
+    type: entity
+    table: publication
+    indexes:
+        fk_publication_user1_idx:
+            columns:
+                - id_user
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        idUser:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            column: id_user
+        title:
+            type: string
+            nullable: false
+            length: 200
+            options:
+                fixed: false
+        dateCreate:
+            type: datetime
+            nullable: false
+            column: date_create
+        content:
+            type: text
+            nullable: false
+            length: 65535
+            options:
+                fixed: false
+        typeContent:
+            type: string
+            nullable: false
+            length: 10
+            options:
+                fixed: false
+            column: type_content
+        dateUpdate:
+            type: datetime
+            nullable: true
+            column: date_update
+        dateRemove:
+            type: datetime
+            nullable: true
+            column: date_remove
+        active:
+            type: boolean
+            nullable: true
+    lifecycleCallbacks: {  }

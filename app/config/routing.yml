@@ -2,9 +2,9 @@ login:
     resource: "@LoginBundle/Resources/config/routing.yml"
     prefix: /
 
-home:
+app:
     resource: "@AppBundle/Resources/config/routing.yml"
-    prefix: /
+
 
 
 #login:
@@ -25,5 +25,5 @@ home:
 
 
 profile:
-  path: /profile
-  defaults: { _controller: \AppBundle\Controller\Profile\ProfileController::profile }
+  resource: "@ProfileBundle/Resources/config/routing.yml"
+

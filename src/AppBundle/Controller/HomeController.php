@@ -5,16 +5,21 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Api\ApiMusical;
+use ProfileBundle\Controller\BaseController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class HomeController extends Controller
+class HomeController extends BaseController
 {
     private $spotify;
 
     public function index(Request $request){
 
-        $this->spotify = $this->get('api.musical');
+        parent::checkUser($request);
+
+        $this->spotify = $this->get('Api.musical');
+
+       // $this->spotify->configure($_GET['code']);
 
         $user = array(
             'picture'=>$request->getSession()->get('picture'),
@@ -23,7 +28,7 @@ class HomeController extends Controller
         );
 
 
-        if ($user == null){
+        if ($this->user == null){
             return $this->redirect('/');
         }
 

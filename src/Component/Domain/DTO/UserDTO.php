@@ -19,7 +19,7 @@ class UserDTO
      * @param $locale
      * @param $id
      */
-    public function __construct($email, $name, $picture, $locale, $id)
+    public function __construct($email = '', $name = '', $picture = '', $locale = '', $id = '')
     {
         $this->email = $email;
         $this->name = $name;

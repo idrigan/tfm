@@ -1,6 +1,11 @@
 spotify-login:
-  path: /api/check-spotify
-  defaults: { _controller: \AppBundle\Controller\SpotifyController::responseAuthorize }
+  path: /api/spotify/check-spotify
+  defaults: { _controller: \AppBundle\Controller\ApiMusicalController::responseAuthorize }
+
+api-search:
+  path: /api/spotify/search
+  defaults: { _controller: \AppBundle\Controller\ApiMusicalController::search }
+  methods: [POST]
 
 home:
   defaults: { _controller: \AppBundle\Controller\HomeController::index }

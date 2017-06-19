@@ -5,25 +5,35 @@ namespace AppBundle\Api;
 
 
 use Component\Application\Api\InterfaceMusical;
+use GuzzleHttp\Psr7\Response;
 use SpotifyWebAPI;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class ApiMusical implements InterfaceMusical
 {
-    private $spotify;
+    private $spotifySession;
+    private $apiSpotify;
 
     public function __construct(ContainerInterface $container)
     {
-        $this->spotify = new SpotifyWebAPI\Session(
+        $this->apiSpotify = new SpotifyWebAPI\SpotifyWebAPI();
+
+        $this->spotifySession = new SpotifyWebAPI\Session(
             $container->getParameter('client_id'),//client id
-            $container->getParameter('client_secret'),//client secret
-            $container->getParameter('url')
+            $container->getParameter('client_secret')//client secret
+//            $container->  getParameter('url')
         );
 
-        $this->authorize();
+        $this->spotifySession->requestCredentialsToken();
+        $token = $this->spotifySession->getAccessToken();
+
+        $this->apiSpotify->setAccessToken($token);
+
+
     }
 
-    private function authorize(){
-      header('Location: ' . $this->spotify->getAuthorizeUrl());
+    public function search($value){
+        return $this->apiSpotify->search("fuga",array("artist","album","playlist","track"));
     }
 }

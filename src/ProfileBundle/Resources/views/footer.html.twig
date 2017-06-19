@@ -1,0 +1,41 @@
+{% block javascripts %}
+
+    <script>
+        $(document).ready(function(){
+            $("#txtSearchFriends").on("input",function(e){
+
+                var search = $(this).val();
+
+                if (search.length >= 3){
+                    var friends = Friends;
+                    friends.search(search);
+                }else{
+                    $("#resultados").hide();
+                }
+            });
+        });
+
+        function searchFriends() {
+            var value = $("#txtSearchFriends").val();
+            var friends = Friends;
+            friends.search(value);
+
+        }
+    </script>
+{% endblock %}
+{% block footer %}
+    <footer>
+        <div class="container" style="background-color:black;padding:10px;opacity:0.8">
+            <div class="col-md-12">
+                  <div class="row">
+                      <div class="col-md-4" style="color:white;">
+                          <span>TFM - Red Social de Música 2017</span>
+                      </div>
+                  </div>
+            </div>
+
+        </div>
+
+    </footer>
+
+{% endblock %}

@@ -1,0 +1,70 @@
+Component\Domain\Entity\ResponsePublication:
+    type: entity
+    table: response_publication
+    indexes:
+        fk_response_publication_publication1_idx:
+            columns:
+                - id_publication
+        fk_response_publication_user1_idx:
+            columns:
+                - id_user
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        content:
+            type: string
+            nullable: false
+            length: 200
+            options:
+                fixed: false
+        typeContent:
+            type: string
+            nullable: true
+            length: 10
+            options:
+                fixed: false
+            column: type_content
+        dateCreate:
+            type: datetime
+            nullable: false
+            column: date_create
+        dateUpdate:
+            type: datetime
+            nullable: true
+            column: date_update
+        dateRemove:
+            type: datetime
+            nullable: true
+            column: date_remove
+        active:
+            type: boolean
+            nullable: false
+    manyToOne:
+        idPublication:
+            targetEntity: Publication
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_publication:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idUser:
+            targetEntity: User
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_user:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

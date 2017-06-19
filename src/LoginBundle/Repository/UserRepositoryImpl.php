@@ -33,4 +33,6 @@ class UserRepositoryImpl extends EntityRepository implements UserRepository
     public function getById($idUser){
         return $this->find($idUser);
     }
+
+
 }

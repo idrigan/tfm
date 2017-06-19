@@ -1,0 +1,50 @@
+{% extends 'ProfileBundle::template.html.twig' %}
+
+{% block container %}
+    <div class="row mt-2" >
+        <div class="col-md-12 text-center">
+            <h1>MY DATA</h1>
+        </div>
+
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-12" >
+            <div class="row">
+                <div class="col-md-12 p-3" style="border:1px solid lightgray;border-radius: 10px;">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div style="border:3px solid lightgray;border-radius: 100%;width:200px;overflow-x: hidden">
+                                <img src="{{ user.picture }}" width="200px"/>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <form action="/save-personal-data" method="POST">
+                                <div class="form-group ">
+                                    <label class="form-control"><span class="font-weight-bold">Email:</span> {{ user.email }} </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control"><span class="font-weight-bold">Name:</span> {{ user.name }}</label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control"><span class="font-weight-bold">From:</span> {{ userData.dateCreate|date('d/m/Y') }}</label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="font-weight-bold">Nick:</label>
+                                    <input type="text" class="form-control" name="nick" value="{{ userData.nick }}">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 text-right">
+                                        <input type="submit" value="Save" class="btn btn-primary">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+

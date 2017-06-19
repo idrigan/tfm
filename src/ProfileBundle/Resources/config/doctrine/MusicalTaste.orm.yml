@@ -1,0 +1,26 @@
+Component\Domain\Entity\MusicalTaste:
+    type: entity
+    table: musical_taste
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            nullable: false
+            length: 100
+            options:
+                fixed: false
+        description:
+            type: string
+            nullable: true
+            length: 200
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

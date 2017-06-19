@@ -1,0 +1,83 @@
+<?php
+
+namespace Component\Domain\Entity;
+
+/**
+ * UserMusicalTaste
+ */
+class UserMusicalTaste
+{
+    /**
+     * @var integer
+     */
+    private $id;
+
+    /**
+     * @var \ProfileBundle\Entity\MusicalTaste
+     */
+    private $idMusicalTaste;
+
+    /**
+     * @var \ProfileBundle\Entity\User
+     */
+    private $idUser;
+
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set idMusicalTaste
+     *
+     * @param \ProfileBundle\Entity\MusicalTaste $idMusicalTaste
+     *
+     * @return UserMusicalTaste
+     */
+    public function setIdMusicalTaste(\ProfileBundle\Entity\MusicalTaste $idMusicalTaste = null)
+    {
+        $this->idMusicalTaste = $idMusicalTaste;
+
+        return $this;
+    }
+
+    /**
+     * Get idMusicalTaste
+     *
+     * @return \ProfileBundle\Entity\MusicalTaste
+     */
+    public function getIdMusicalTaste()
+    {
+        return $this->idMusicalTaste;
+    }
+
+    /**
+     * Set idUser
+     *
+     * @param \ProfileBundle\Entity\User $idUser
+     *
+     * @return UserMusicalTaste
+     */
+    public function setIdUser(\ProfileBundle\Entity\User $idUser = null)
+    {
+        $this->idUser = $idUser;
+
+        return $this;
+    }
+
+    /**
+     * Get idUser
+     *
+     * @return \ProfileBundle\Entity\User
+     */
+    public function getIdUser()
+    {
+        return $this->idUser;
+    }
+}

@@ -5,6 +5,8 @@ imports:
     - { resource: "@LoginBundle/Resources/config/services.yml"}
     - { resource: "@AppBundle/Resources/config/parameters.yml"}
     - { resource: "@AppBundle/Resources/config/services.yml"}
+    - { resource: "@ProfileBundle/Resources/config/services.yml"}
+
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -69,6 +71,12 @@ doctrine:
                     is_bundle: false
                     dir:   %kernel.root_dir%/../src/LoginBundle/Resources/config/doctrine
                     prefix: Component\Domain\Entity
+              ProfileBundle:
+                    type: yml
+                    is_bundle: false
+                    dir:   %kernel.root_dir%/../src/ProfileBundle/Resources/config/doctrine
+                    prefix: Component\Domain\Entity
+
 
 # Swiftmailer Configuration
 swiftmailer:

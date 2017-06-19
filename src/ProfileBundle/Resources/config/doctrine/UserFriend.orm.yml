@@ -1,0 +1,42 @@
+Component\Domain\Entity\UserFriend:
+    type: entity
+    table: user_friend
+    indexes:
+        fk_user_friend_user1_idx:
+            columns:
+                - id_user
+        fk_user_friend_user2_idx:
+            columns:
+                - id_user_friend
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        dateCreate:
+            type: datetime
+            nullable: false
+            column: date_create
+    manyToOne:
+        idUser:
+            targetEntity: User
+            cascade: {  }
+            fetch: LAZY
+            joinColumns:
+                id_user:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idUserFriend:
+            targetEntity: User
+            cascade: {  }
+            fetch: LAZY
+            joinColumns:
+                id_user_friend:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -4,24 +4,26 @@
 namespace ProfileBundle\Controller;
 
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Component\Domain\DTO\UserDTO;
+use Symfony\Component\HttpFoundation\Request;
 
-class ProfileController extends Controller
+class ProfileController  extends BaseController
 {
-    private $session;
 
-    public function __construct()
-    {
-        $this->session = new Session();
-    }
+    public function execute(Request $request){
 
-    public function profile(){
+        parent::checkUser($request);
 
-        $user = $this->session->get('user');
+        $userDTO = new UserDTO();
+        $userDTO->setId($this->user['id']);
 
-        return $this->render('default/profile.html.twig', [
-                'user' => $user]
+        $userUseCase = $this->get('app.user.usecase.getuser');
+        $userData = $userUseCase->getById($userDTO);
+
+        return $this->render('@ProfileBundle/Resources/views/profile.html.twig', [
+                'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
+                'userData' => $userData,
+                'user'=>$this->user]
         );
     }
 

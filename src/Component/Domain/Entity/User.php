@@ -114,5 +114,8 @@ class User
     {
         return $this->nick;
     }
-}
 
+    public function setId($id){
+        $this->id = $id;
+    }
+}
