@@ -34,6 +34,6 @@ class ApiMusical implements InterfaceMusical
     }
 
     public function search($value){
-        return $this->apiSpotify->search("fuga",array("artist","album","playlist","track"));
+        return $this->apiSpotify->search($value,array("artist","album","playlist","track"));
     }
 }
