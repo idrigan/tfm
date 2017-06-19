@@ -16,7 +16,7 @@
 
                     if (result.response == "OK"){
                         //result.data;
-                        Spotify.renderResult(result.data);
+                        Spotify.renderResult(result.data,value);
                     }else{
                         //MOSTRAR ERROR
                         errorCallback("An internal error has occurred","error");
@@ -30,7 +30,7 @@
 
             return xhr.responseText;
         },
-        renderResult: function renderResult(result){
+        renderResult: function renderResult(result,val){
             var albums  = result.albums.items;
             var artists  = result.artists.items;
             var playlists = result.playlists;
@@ -75,7 +75,7 @@
             divCol.className = "col-md-12 mb-1 text-center";
             var a =document.createElement("a");
             a.setAttribute("style","width:100%");
-            a.href="/search-more";
+            a.href="/api/spotify/search-more?val="+val;
             divCol.innerHTML = "More...";
             divCol.setAttribute("style","padding: 5px;font-size: 14px;");
             a.appendChild(divCol);
@@ -97,12 +97,15 @@
                 }
                 var divCol = document.createElement("div");
                 divCol.className = "col-md-12 mb-2";
+                divCol.setAttribute("onclick","add("+JSON.stringify(album)+")");
                 var divRow = document.createElement("div");
                 divRow.className = "row row-result";
                 var divColImg = document.createElement("div");
                 divColImg.className = "col-md-3 col-xs-6 text-center no-padding";
                 var img = document.createElement("img");
-                img.src = album.images[2].url;
+                if (album.images[2].url != null) {
+                    img.src = album.images[2].url;
+                }
                 img.setAttribute("alt",album.name);
                 img.setAttribute("title",album.name);
                 img.setAttribute("width", '50px');
@@ -134,7 +137,9 @@
                 var divColImg = document.createElement("div");
                 divColImg.className = "col-md-3 col-xs-6 text-center no-padding";
                 var img = document.createElement("img");
-                img.src = artist.images[2].url;
+                if ( artist.images != null) {
+                    img.src = artist.images[2].url;
+                }
                 img.setAttribute("alt",artist.name);
                 img.setAttribute("title",artist.name);
                 img.setAttribute("width", '50px');
@@ -154,7 +159,6 @@
         renderTracks: function renderTracks(tracks){
             var contenedor = document.getElementById("resultados-spotiy");
             $.each(tracks,function(key,track){
-                console.log(track);
                 if (key >=2){
                     return;
                 }
@@ -165,7 +169,9 @@
                 var divColImg = document.createElement("div");
                 divColImg.className = "col-md-3 col-xs-6 text-center no-padding";
                 var img = document.createElement("img");
-                img.src = track.album.images[2].url;
+                if (track.album.images[2].url != null) {
+                    img.src = track.album.images[2].url;
+                }
                 img.setAttribute("width", '50px');
                 img.setAttribute("alt",track.name);
                 img.setAttribute("title",track.name);

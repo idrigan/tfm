@@ -33,7 +33,7 @@ class ApiMusical implements InterfaceMusical
 
     }
 
-    public function search($value){
-        return $this->apiSpotify->search($value,array("artist","album","playlist","track"));
+    public function search($value,$limit = 2,$offset = 0){
+        return $this->apiSpotify->search($value,array("artist","album","playlist","track"),array('limit'=>$limit,'offset'=>$offset));
     }
 }

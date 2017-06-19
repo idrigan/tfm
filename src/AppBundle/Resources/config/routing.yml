@@ -7,6 +7,11 @@ api-search:
   defaults: { _controller: \AppBundle\Controller\ApiMusicalController::search }
   methods: [POST]
 
+api-show-more:
+  path: /api/spotify/search-more
+  defaults: { _controller: \AppBundle\Controller\ApiMusicalController::searchMore }
+  methods: [GET]
+
 home:
   defaults: { _controller: \AppBundle\Controller\HomeController::index }
   path: /home

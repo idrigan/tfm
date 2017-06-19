@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+    {% include 'AppBundle::header.html.twig' %}
+{% endblock %}
+
+{% block body %}
+
+    <main>
+        <section class="container no-padding">
+            <div class="col-md-12 " style="background-color: darkgray;">
+                <div class="row justify-content-md-center">
+                     <div class="col-md-6" style="margin:0 auto;">
+                        {% block container %}
+
+                        {% endblock %}
+                     </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    {% block footer %}
+        {% include 'AppBundle::footer.html.twig' %}
+    {% endblock %}
+
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}

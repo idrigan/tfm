@@ -1,25 +1,27 @@
-{% extends 'base.html.twig' %}
+{% extends 'AppBundle::template.html.twig' %}
 
-{% block header %}
-{% include 'AppBundle::header.html.twig' %}
-{% endblock %}
+{% block container %}
+    <div class="row" style="min-height: 700px;background-color: lightgray;">
+        <div class="col-md-12">
+            <div class="row mt-4">
+                <div class="col-md-12" id="element-spotify">
+                    <input type="hidden" name="id" value="">
+                    <input type="hidden" name="type" value="">
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <textarea class="form-control" name="" rows="5" placeholder="Comment"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-12 text-right">
+                    <input type="submit" value="Submit" class="btn btn-primary">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" id="publications">
 
-{% block body %}
-
-<main>
-    <article class="container ">
-        {% block container %}
-            {% include 'AppBundle::container.html.twig' %}
-        {% endblock %}
-    </article>
-</main>
-
-{% block footer %}
-    {% include 'AppBundle::footer.html.twig' %}
-{% endblock %}
-
-{% endblock %}
-
-{% block stylesheets %}
-    {{ parent() }}
+            </div>
+        </div>
+    </div>
 {% endblock %}

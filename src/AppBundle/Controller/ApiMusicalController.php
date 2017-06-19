@@ -28,5 +28,25 @@ class ApiMusicalController extends BaseController
         }
     }
 
+    public function searchMore(Request $request){
+
+        parent::checkUser($request);
+
+        $val = $request->query->get('val');
+
+        $apiMusical = $this->get('api.musical');
+
+        $result = $apiMusical->search($val,50,0);
+
+        var_dump($result);
+
+        return $this->render('@AppBundle/Resources/views/showMoreResults.html.twig', [
+                'user' => $this->user,
+                'result' => $result
+            ]
+        );
+
+
+    }
 
 }
