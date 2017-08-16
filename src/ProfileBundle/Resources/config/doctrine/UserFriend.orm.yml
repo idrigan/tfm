@@ -22,6 +22,16 @@ Component\Domain\Entity\UserFriend:
             type: datetime
             nullable: false
             column: date_create
+        accepted:
+            type: boolean
+            nullable: false
+            column: accepted
+
+        cancelled:
+            type: boolean
+            nullable: false
+            column: cancelled
+
     manyToOne:
         idUser:
             targetEntity: User

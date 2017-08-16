@@ -55,4 +55,12 @@ Component\Domain\Entity\Publication:
         active:
             type: boolean
             nullable: true
+        spotifyId:
+            type: string
+            length: 100
+            nulable: true
+        spotifyUrl:
+            type: string
+            length: 200
+            nulable: true
     lifecycleCallbacks: {  }

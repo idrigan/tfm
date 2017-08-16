@@ -11,11 +11,29 @@ class UserFriendDTO
 
     private $idUser;
     private $friends;
+    private $accepted;
 
-    public function __construct($idUser)
+    public function __construct($idUser,$accepted =0)
     {
         $this->idUser = $idUser;
+        $this->accepted = $accepted;
         $this->friends = array();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAccepted()
+    {
+        return $this->accepted;
+    }
+
+    /**
+     * @param mixed $accepted
+     */
+    public function setAccepted($accepted)
+    {
+        $this->accepted = $accepted;
     }
 
     /**

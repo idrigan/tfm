@@ -5,10 +5,9 @@ namespace AppBundle\Api;
 
 
 use Component\Application\Api\InterfaceMusical;
-use GuzzleHttp\Psr7\Response;
 use SpotifyWebAPI;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\Request;
+
 
 class ApiMusical implements InterfaceMusical
 {
@@ -33,7 +32,21 @@ class ApiMusical implements InterfaceMusical
 
     }
 
-    public function search($value,$limit = 2,$offset = 0){
+    public function search($value,$limit = 10,$offset = 0){
+        $this->getRefreshToken();
         return $this->apiSpotify->search($value,array("artist","album","playlist","track"),array('limit'=>$limit,'offset'=>$offset));
+    }
+
+
+    public function getToken(){
+        return $this->spotifySession->getAccessToken();
+    }
+
+    private function getRefreshToken(){
+        $refreshToken = $this->spotifySession->getRefreshToken();
+        $this->spotifySession->refreshAccessToken($refreshToken);
+        $accessToken = $this->spotifySession->getAccessToken();
+        $this->apiSpotify->setAccessToken($accessToken);
+
     }
 }

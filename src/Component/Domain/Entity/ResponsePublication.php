@@ -214,7 +214,7 @@ class ResponsePublication
      *
      * @return ResponsePublication
      */
-    public function setIdPublication(\ProfileBundle\Entity\Publication $idPublication = null)
+    public function setIdPublication(Publication $idPublication = null)
     {
         $this->idPublication = $idPublication;
 
@@ -238,7 +238,7 @@ class ResponsePublication
      *
      * @return ResponsePublication
      */
-    public function setIdUser(\ProfileBundle\Entity\User $idUser = null)
+    public function setIdUser(User $idUser = null)
     {
         $this->idUser = $idUser;
 

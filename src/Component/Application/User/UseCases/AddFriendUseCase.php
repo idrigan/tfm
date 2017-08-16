@@ -24,8 +24,6 @@ class AddFriendUseCase
 
     public function execute(UserFriendDTO $userFriendDTO){
 
-        $user = $this->userRepository->getById($userFriendDTO->getIdUser());
-
         $friends = $userFriendDTO->getFriends();
         $date = new \DateTime();
         $date->format("Y-m-d H:i:s");
@@ -39,7 +37,21 @@ class AddFriendUseCase
                 return FALSE;
             }
 
-            $userFriend = new UserFriend($user,$friend,$date);
+            $userFriend = $this->repository->getUserFriend($userFriendDTO->getIdUser(),$friend->getId());
+
+            if ($userFriend == null){
+                //$idUser,$idUserFriend,$date
+                $user = $this->userRepository->getById($userFriendDTO->getIdUser());
+                $userFriend = new UserFriend($user,$friend,$date);
+                $userFriend->setCancelled(false);
+
+
+            }else {
+                $userFriend->setAccepted(true);
+                $userFriend->setDateCreate($date);
+                $userFriend->setCancelled(false);
+            }
+            //$userFriend = new UserFriend($user,$friend,$date,TRUE);
 
             $this->repository->addFriend($userFriend);
         }

@@ -1,9 +1,10 @@
 (function() {
     Spotify = {
         api_url: "http://box.example.com:8000/api/spotify/search",
+        api_send_response:"http://box.example.com:8000/api/spotify/response",
 
         search: function search(value) {
-           this.request("POST", this.api_url, value,this.renderResult,this.showNotification);
+           this.request("POST", this.api_url, value,10,this.renderResult,this.showNotification);
         },
 
         request : function request(method, url, value, limit, callback,errorCallback) {
@@ -16,7 +17,7 @@
 
                     if (result.response == "OK"){
                         //result.data;
-                        Spotify.renderResult(result.data,value);
+                        callback(result.data,value);
                     }else{
                         //MOSTRAR ERROR
                         errorCallback("An internal error has occurred","error");
@@ -39,7 +40,7 @@
             var contenedor = document.getElementById("resultados-spotiy");
             contenedor.innerHTML = "";
 
-             var divCol = document.createElement("div");
+           /*  var divCol = document.createElement("div");
              divCol.className = "col-md-12 text-center";
              divCol.setAttribute("style","color: white;padding: 10px;font-weight: bold;");
                 var label = document.createElement("label");
@@ -59,19 +60,20 @@
             contenedor.appendChild(divCol);
 
             this.renderArtists(artists);
+            */
 
-            var divCol = document.createElement("div");
+           /*var divCol = document.createElement("div");
             divCol.className = "col-md-12 text-center";
             divCol.setAttribute("style","color: white;padding: 10px;font-weight: bold;");
             var label = document.createElement("label");
             label.innerHTML = "Songs";
             divCol.appendChild(label);
 
-            contenedor.appendChild(divCol);
+            contenedor.appendChild(divCol);*/
 
             this.renderTracks(tracks);
 
-            var divCol = document.createElement("div");
+           /* var divCol = document.createElement("div");
             divCol.className = "col-md-12 mb-1 text-center";
             var a =document.createElement("a");
             a.setAttribute("style","width:100%");
@@ -79,7 +81,7 @@
             divCol.innerHTML = "More...";
             divCol.setAttribute("style","padding: 5px;font-size: 14px;");
             a.appendChild(divCol);
-            contenedor.appendChild(a);
+            contenedor.appendChild(a);*/
 
             if (albums.length > 0 || artists.length > 0 || playlists.length > 0 || tracks.length > 0){
                 $("#resultados-spotiy").show();
@@ -92,7 +94,7 @@
             var contenedor = document.getElementById("resultados-spotiy");
             $.each(albums,function(key,album){
                 //console.log(album);
-                if (key >= 2){
+                if (key >= 10){
                     return;
                 }
                 var divCol = document.createElement("div");
@@ -159,11 +161,15 @@
         renderTracks: function renderTracks(tracks){
             var contenedor = document.getElementById("resultados-spotiy");
             $.each(tracks,function(key,track){
-                if (key >=2){
+                if (key >=10){
                     return;
                 }
                 var divCol = document.createElement("div");
-                divCol.className = "col-md-12 mb-2";
+                divCol.setAttribute("data-id",track.id);
+                divCol.className = "col-md-12 addSong mb-2";
+                divCol.addEventListener("click",selectedSong,false);
+                divCol.setAttribute("onclick","selectedSong('"+ track.id +"','" + track.name + "','" + track.uri + "')");
+
                 var divRow = document.createElement("div");
                 divRow.className = "row row-result";
                 var divColImg = document.createElement("div");
@@ -181,7 +187,10 @@
                 var labelTitle = document.createElement("label");
                 labelTitle.setAttribute("style","color:white");
                 labelTitle.innerHTML = track.name;
+                var p = document.createElement("p");
+                p.innerHTML = track.album.name;
                 divColInfo.appendChild(labelTitle);
+                divColInfo.appendChild(p);
                 divRow.appendChild(divColImg);
                 divRow.appendChild(divColInfo);
                 divCol.appendChild(divRow);
@@ -190,7 +199,69 @@
         },
         showNotification: function showNotification(message,type){
             $.notify(message,type,{position: "top right"});
+
+        },
+        addMessage: function addMessage(element,idComment){
+            var parent = element.parentNode;
+
+
+            if (document.getElementById("response") != null){
+                var contenedor = document.getElementById("response").parentNode;
+                console.log(contenedor);
+                contenedor.setAttribute("style","border-bottom:1px solid darkgray");
+                contenedor.className = "mb-4";
+                contenedor.removeChild(document.getElementById("response"));
+
+
+                var divButton = document.createElement("div");
+                divButton.className = "col-12 text-center mb-3";
+                divButton.setAttribute("style","border:1px solid darkgray;padding: 5px;");
+                var buttonAdd = document.createElement("button");
+                buttonAdd.className ="btn btn-primary";
+                buttonAdd.setAttribute("style","font-size:12px;cursor: pointer;");
+                buttonAdd.setAttribute("onclick","addMessage("+buttonAdd+","+idComment+");");
+                buttonAdd.textContent = 'Add answer';
+
+                divButton.appendChild(buttonAdd);
+
+                contenedor.appendChild(divButton);
+            }
+
+            var div = document.createElement("div");
+            div.id="response";
+
+            element.setAttribute("style","display:none");
+            var input = document.createElement("textarea");
+            input.id="text-area-respuesta";
+            input.setAttribute("style","width:100%;padding-left: 5px;");
+            input.setAttribute("placeholder","Add your response...");
+            input.rows="3";
+            var row= document.createElement("div");
+            row.className = "col-12 text-right no-padding";
+            var btn= document.createElement("button");
+            btn.textContent = "Send";
+            btn.setAttribute("type","submit");
+            btn.className="btn btn-primary";
+            btn.setAttribute("onclick","Spotify.sendAnswer("+idComment+");");
+            row.appendChild(btn);
+            div.appendChild(input);
+            div.appendChild(row);
+
+            parent.appendChild(div);
+        },
+        sendAnswer: function sendAnswer(idComment){
+            var textArea = document.getElementById("text-area-respuesta");
+
+            var data = Array(idComment,textArea.value);
+
+            this.request("POST", this.api_send_response,data ,0,this.renderResponse,this.showNotification);
+        },
+        renderResponse: function renderResponse(data){
+            window.location.href = "/home";
         }
+
+
+
     };
 
 

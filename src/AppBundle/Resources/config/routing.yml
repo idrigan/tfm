@@ -12,8 +12,22 @@ api-show-more:
   defaults: { _controller: \AppBundle\Controller\ApiMusicalController::searchMore }
   methods: [GET]
 
+api-add-response:
+  path: /api/spotify/response
+  defaults: { _controller: \AppBundle\Controller\ApiMusicalController::addResponse }
+  methods: [POST]
+
 home:
   defaults: { _controller: \AppBundle\Controller\HomeController::index }
   path: /home
   methods: [GET]
 
+save-comment:
+  defaults: { _controller: \AppBundle\Controller\CommentController::save }
+  path: /save-comment
+  methods: [POST]
+
+get-comments:
+  defaults: { _controller: \AppBundle\Controller\CommentController::index }
+  path: /comments
+  methods: [GET]

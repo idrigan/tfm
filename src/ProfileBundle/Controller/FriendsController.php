@@ -17,14 +17,14 @@ class FriendsController extends BaseController
 
         $friendUseCase = $this->get('app.user.usecase.friendsusecase');
 
-        $friends = $friendUseCase->execute(new UserFriendDTO($this->user['id']));
+        $friends = $friendUseCase->execute(new UserFriendDTO($this->user['id'],TRUE));
 
-
-        return $this->render('@ProfileBundle/Resources/views/friends.html.twig', [
+       return  $this->renderCustomView('@ProfileBundle/Resources/views/friends.html.twig',[
             'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
             'user'=>$this->user,
-            'friends'=>$friends->getFriends()
-        ]);
+            'friends'=>$friends->getFriends()]);
+
+
     }
 
 

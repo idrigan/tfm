@@ -21,7 +21,7 @@ class MusicalTastesController extends BaseController
         $musicalTastes = $musicalTastesUseCase->execute($this->user['id']);
 
 
-        return $this->render('@ProfileBundle/Resources/views/musicalTastes.html.twig', [
+        return $this->renderCustomView('@ProfileBundle/Resources/views/musicalTastes.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir') . '/..') . DIRECTORY_SEPARATOR,
             'user'=>$this->user,
             'musicalTastes'=>$musicalTastes->getMusicalTastes(),

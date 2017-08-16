@@ -42,6 +42,46 @@ class Publication
      */
     private $dateUpdate;
 
+
+    /**
+     * Publication constructor.
+     */
+    public function __construct()
+    {
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSpotifyId()
+    {
+        return $this->spotifyId;
+    }
+
+    /**
+     * @param mixed $spotifyId
+     */
+    public function setSpotifyId($spotifyId)
+    {
+        $this->spotifyId = $spotifyId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSpotifyUrl(): string
+    {
+        return $this->spotifyUrl;
+    }
+
+    /**
+     * @param string $spotifyUrl
+     */
+    public function setSpotifyUrl(string $spotifyUrl)
+    {
+        $this->spotifyUrl = $spotifyUrl;
+    }
+
     /**
      * @var \DateTime
      */
@@ -52,6 +92,15 @@ class Publication
      */
     private $active;
 
+    /**
+     * @var string
+     */
+    private $spotifyId;
+
+    /**
+     * @var string
+     */
+    private $spotifyUrl;
 
     /**
      * Get id

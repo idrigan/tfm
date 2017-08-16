@@ -14,9 +14,14 @@ searchfriends:
   methods: [POST]
 
 add-search-friends:
-  path: /friends/add/{id}/
+  path: /friends/add/{idUserFriend}
   defaults: { _controller: \ProfileBundle\Api\FriendsController::add }
-  methods: [GET]
+  methods: [GET,POST]
+
+cancel-friends:
+  path: /friends/cancel-friend/{idUserFriend}
+  defaults: {_controller: \ProfileBundle\Api\FriendsController::cancel }
+  methods: [POST]
 
 musical-taste:
   path: /musical-tastes
@@ -36,4 +41,9 @@ contact:
 send-contact:
   path: /send-contact
   defaults: { _controller: \ProfileBundle\Controller\ContactController::send }
+  methods: [POST]
+
+send-invitation:
+  path: /friends/send-invitation
+  defaults: { _controller: \ProfileBundle\Api\SendInvitationController::execute }
   methods: [POST]

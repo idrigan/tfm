@@ -21,6 +21,18 @@
             friends.search(value);
 
         }
+
+        function showFriendsNotifications(){
+            var friendsNotifications ="{{ notificationsFriends.friends | escape | json_encode()  }}";
+            friendsNotifications = JSON.parse(friendsNotifications.replace(/&quot;/g,'"'));
+            Friends.renderNotifications(friendsNotifications);
+        }
+
+        function hideFriendsNotifications(){
+            var divFriends = document.getElementById("resultados-friend");
+            divFriends.style.display="none";
+        }
+
     </script>
 {% endblock %}
 {% block footer %}

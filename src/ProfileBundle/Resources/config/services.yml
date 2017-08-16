@@ -12,15 +12,31 @@ services:
       entityManager: "@doctrine.orm.entity_manager"
       dispatcher: "@event_dispatcher"
 
-  app.user.usecase.searchfriendsusecase:
-      class: Component\Application\User\UseCases\SearchFriendsUseCase
+  app.user.usecase.friendsNotAcceptedusecase:
+      class: Component\Application\User\UseCases\FriendsNotAcceptedUseCase
       arguments:
         userRepository: "@app.repository.friends"
         entityManager: "@doctrine.orm.entity_manager"
         dispatcher: "@event_dispatcher"
 
+  app.user.usecase.searchfriendsusecase:
+      class: Component\Application\User\UseCases\SearchFriendsUseCase
+      arguments:
+        userRepository: "@app.repository.friends"
+        userMusicalRepository: "@app.repository.usermusicaltastes"
+        entityManager: "@doctrine.orm.entity_manager"
+        dispatcher: "@event_dispatcher"
+
   app.user.usecase.addfriendusecase:
     class: Component\Application\User\UseCases\AddFriendUseCase
+    arguments:
+        friendRepository: "@app.repository.friends"
+        userRepository: "@app.repository.user"
+        entityManager: "@doctrine.orm.entity_manager"
+        dispatcher: "@event_dispatcher"
+
+  app.user.usecase.cancelfriendusecase:
+    class: Component\Application\User\UseCases\CancelFriendUseCase
     arguments:
         friendRepository: "@app.repository.friends"
         userRepository: "@app.repository.user"
@@ -41,6 +57,12 @@ services:
       entityManager: "@doctrine.orm.entity_manager"
       dispatcher: "@event_dispatcher"
 
+  app.user.usecase.searchfriendsmusicaltastesusecase:
+      class: Component\Application\User\UseCases\SearchFriendsByMusicalTastesUseCase
+      arguments:
+        userRepository: "@app.repository.usermusicaltastes"
+        entityManager: "@doctrine.orm.entity_manager"
+        dispatcher: "@event_dispatcher"
 
   app.user.usecase.savemusicaltastesusecase:
     class: Component\Application\User\UseCases\SaveMusicalTastesUseCase

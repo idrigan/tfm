@@ -3,6 +3,10 @@
 namespace AppBundle\Controller;
 
 
+use Component\Domain\DTO\CommentDTO;
+use Component\Domain\DTO\ResponseCommentDTO;
+use Component\Domain\DTO\UserDTO;
+use Component\Domain\Entity\Publication;
 use ProfileBundle\Controller\BaseController;
 use SpotifyWebAPI\SpotifyWebAPIException;
 use Symfony\Component\HttpFoundation\Request;
@@ -45,7 +49,45 @@ class ApiMusicalController extends BaseController
                 'result' => $result
             ]
         );
+    }
 
+    public function addResponse(Request $request){
+
+        parent::checkUser($request);
+
+        $data = json_decode($request->getContent(), true);
+        $data = $data['value'];
+        if (count($data) != 2){
+            return new Response(json_encode(array("response" => "ERROR","data"=>"Incorrect parameters")));
+        }
+
+        $idCommnet = $data[0];
+        $comment = $data[1];
+
+        if (empty($idCommnet) || empty($comment)){
+            return new Response(json_encode(array("response" => "ERROR","data"=>"No data")));
+        }
+
+
+        $userDTO = new UserDTO();
+        $userDTO->setId($this->user['id']);
+
+        $userUseCase = $this->get('app.user.usecase.getuser');
+        $userData = $userUseCase->getById($userDTO);
+
+        $publicatioUseCase = $this->get('app.comment.usecase.getbyid');
+
+        $publication = $publicatioUseCase->execute(new CommentDTO($idCommnet));
+
+        $responseComment = new ResponseCommentDTO($publication,$comment,$userData);
+
+       $responsePublicationUseCase = $this->get('app.comment.save.response');
+
+       if ($responsePublicationUseCase->execute($responseComment)){
+           return new Response(json_encode(array("response" => "OK","data"=>"The comment was saved successfully")));
+       }else{
+           return new Response(json_encode(array("response" => "ERROR","data"=>"Error to save response")));
+       }
 
     }
 

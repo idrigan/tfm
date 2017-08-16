@@ -10,4 +10,5 @@ interface UserMusicalTastesRepository
 {
     public function saveMusicalTastes(UserMusicalTaste $userMusicalTaste);
     public function getAllMusicalTastesByUser($idUser);
+    public function searchFriendsByMusicalTaste($idUser,$value);
 }

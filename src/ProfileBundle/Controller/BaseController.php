@@ -2,6 +2,7 @@
 
 namespace ProfileBundle\Controller;
 
+use Component\Domain\DTO\UserFriendDTO;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -32,5 +33,17 @@ class BaseController extends Controller
             return new RedirectResponse("/");
         }
 
+    }
+
+    protected function renderCustomView($view , $data ){
+
+
+        $friendUseCase = $this->get('app.user.usecase.friendsNotAcceptedusecase');
+
+        $friends = $friendUseCase->execute(new UserFriendDTO($this->user['id'],FALSE));
+
+        $data['notificationsFriends'] = $friends;
+
+        return $this->render($view,$data);
     }
 }
