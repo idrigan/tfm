@@ -14,6 +14,7 @@ class CommentRepositoryImpl extends EntityRepository implements CommentRepositor
 
     public function save(Publication $publication)
     {
+
         $this->getEntityManager()->persist($publication);
     }
 

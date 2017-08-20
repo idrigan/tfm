@@ -38,6 +38,10 @@ framework:
     assets: ~
     php_errors:
         log: true
+    cache:
+      app: cache.adapter.redis
+      default_redis_provider: redis://192.168.1.50
+
 
 # Twig Configuration
 twig:

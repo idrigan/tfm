@@ -32,6 +32,10 @@
             return xhr.responseText;
         },
         renderResult: function renderResult(result,val){
+            console.log(result);
+            if (result == null){
+                return;
+            }
             var albums  = result.albums.items;
             var artists  = result.artists.items;
             var playlists = result.playlists;
@@ -70,8 +74,8 @@
             divCol.appendChild(label);
 
             contenedor.appendChild(divCol);*/
-
-            this.renderTracks(tracks);
+            console.log(this);
+            Spotify.renderTracks(tracks);
 
            /* var divCol = document.createElement("div");
             divCol.className = "col-md-12 mb-1 text-center";

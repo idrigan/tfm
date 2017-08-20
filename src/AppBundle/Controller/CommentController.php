@@ -28,9 +28,7 @@ class CommentController extends BaseController
             return $this->redirect("/home");
         }else {
             $commentCase = $this->get("app.comment.usecase.save");
-
-            $commentDTO = new CommentDTO($idUser,$comment,$idTrack,$uri,$type);
-
+            $commentDTO = new CommentDTO('',$idUser,$comment,$idTrack,$uri,$type);
             $commentCase->execute($commentDTO);
             return $this->redirect("/home");
         }

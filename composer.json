@@ -30,8 +30,8 @@
         "incenteev/composer-parameter-handler": "^2.0",
         "twig/twig": "^1.0||^2.0",
         "google/apiclient": "^2.0",
-        "jwilsson/spotify-web-api-php": "^1.10"
-
+        "jwilsson/spotify-web-api-php": "^1.10",
+        "predis/predis": "^1.1"
 
     },
     "require-dev": {

@@ -23,6 +23,7 @@ class SaveCommentUseCase
     }
 
     public function execute(CommentDTO $commentDTO){
+
         $publication = new Publication();
         $publication->setActive(true);
         $publication->setContent($commentDTO->getComment());
