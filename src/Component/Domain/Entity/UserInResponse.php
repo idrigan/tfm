@@ -45,7 +45,7 @@ class UserInResponse
      *
      * @return UserInResponse
      */
-    public function setPublication(\ProfileBundle\Entity\Publication $publication = null)
+    public function setPublication(Publication $publication = null)
     {
         $this->publication = $publication;
 
@@ -69,7 +69,7 @@ class UserInResponse
      *
      * @return UserInResponse
      */
-    public function setResponse(\ProfileBundle\Entity\ResponsePublication $response = null)
+    public function setResponse(ResponsePublication $response = null)
     {
         $this->response = $response;
 
