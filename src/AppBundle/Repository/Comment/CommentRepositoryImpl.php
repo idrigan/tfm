@@ -25,7 +25,7 @@ class CommentRepositoryImpl extends EntityRepository implements CommentRepositor
         $sql =" SELECT p.*,u.email 
               FROM publication p LEFT JOIN user_friend uf ON p.id_user = uf.id_user_friend AND  uf.id_user =:idUser
               LEFT JOIN user u ON u.id = uf.id_user_friend OR u.id = p.id_user
-              WHERE p.id_user =:idUser AND p.active =1 ORDER BY p.date_create ASC";
+              WHERE p.id_user =:idUser AND p.active =1 ORDER BY p.date_create DESC";
 
         $query = $this->getEntityManager()->getConnection()->prepare($sql);
         $query->bindValue('idUser', $idUser);
