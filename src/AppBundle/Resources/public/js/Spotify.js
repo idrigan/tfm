@@ -1,7 +1,7 @@
 (function() {
     Spotify = {
-        api_url: "http://box.example.com:8000/api/spotify/search",
-        api_send_response:"http://box.example.com:8000/api/spotify/response",
+        api_url: "/api/spotify/search",
+        api_send_response:"/api/spotify/response",
 
         search: function search(value) {
            this.request("POST", this.api_url, value,10,this.renderResult,this.showNotification);
