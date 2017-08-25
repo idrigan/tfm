@@ -33,7 +33,7 @@ class AddFriendUseCase
             //check exist User
             $friend = $this->userRepository->getById($row->getId());
 
-            if (empty($friend->getId())){
+            if ($friend == null || empty($friend->getId())){
                 return FALSE;
             }
 

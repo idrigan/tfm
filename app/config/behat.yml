@@ -1,0 +1,19 @@
+default:
+    suites:
+        tfm:
+            type: symfony_bundle
+            bundle: ProfileBundle
+            mink_session: selenium2
+            contexts:
+                - ProfileBundle\Features\Context\FeatureContext
+    extensions:
+        Behat\Symfony2Extension: ~
+        Behat\MinkExtension:
+            base_url:  http://box.example.com:8000
+            sessions:
+                default:
+                    symfony2: ~
+                goutte:
+                    goutte: ~
+                selenium2:
+                    selenium2: ~

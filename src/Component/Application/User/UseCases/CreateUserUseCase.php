@@ -21,12 +21,14 @@ class CreateUserUseCase
 
     public function execute(UserDTO $userDTO)
     {
-      //  $em = $this->getDoctrine()->getManager();
+        if (!filter_var($userDTO->getEmail(),FILTER_VALIDATE_EMAIL)){
+            return FALSE;
+        }
         $date = new DateTime();
         $date->format("Y-m-d H:i:s");
         $user = new User($userDTO->getEmail(),$date);
         $this->repository->create($user);
-      //  $em->flush();
+
 
 
     }

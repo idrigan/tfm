@@ -22,15 +22,16 @@ class CommentController extends BaseController
         $uri = $request->get('url');
         $type = $request->get('type');
 
-        if (empty($comment) && empty($idTrack)){
-            $session = $request->getSession();
-            $session->set("error","Don't have commentary o song");
-            return $this->redirect("/home");
-        }else {
-            $commentCase = $this->get("app.comment.usecase.save");
-            $commentDTO = new CommentDTO('',$idUser,$comment,$idTrack,$uri,$type);
-            $commentCase->execute($commentDTO);
-            return $this->redirect("/home");
-        }
+        $commentCase = $this->get("app.comment.usecase.save");
+        $commentDTO = new CommentDTO('',$idUser,$comment,$idTrack,$uri,$type);
+
+           if ($commentCase->execute($commentDTO)) {
+               return $this->redirect("/home");
+           }else{
+               $session = $request->getSession();
+               $session->set("error","Don't have commentary o song");
+               return $this->redirect("/home");
+           }
+
     }
 }

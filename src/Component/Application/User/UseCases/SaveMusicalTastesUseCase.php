@@ -28,6 +28,10 @@ class SaveMusicalTastesUseCase
 
     public function execute(MusicalTastesDTO $musicalTastesDTO){
 
+        if ($musicalTastesDTO->getId() == null){
+            return FALSE;
+        }
+
         $user = $this->userRepository->getById($musicalTastesDTO->getId());
 
         $this->em->clear('filter');

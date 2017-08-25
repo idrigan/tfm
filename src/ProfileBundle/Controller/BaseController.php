@@ -19,7 +19,7 @@ class BaseController extends Controller
         $token = $session->get('token');
 
         if (!is_array($token) || count($token)==0){
-            return new RedirectResponse("/");
+            return new RedirectResponse("/home");
         }
 
         $this->user = array(

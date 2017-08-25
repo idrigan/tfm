@@ -24,6 +24,10 @@ class SaveCommentUseCase
 
     public function execute(CommentDTO $commentDTO){
 
+        if (empty($commentDTO->getComment()) && empty($commentDTO->getTrackId())){
+            return FALSE;
+        }
+
         $publication = new Publication();
         $publication->setActive(true);
         $publication->setContent($commentDTO->getComment());

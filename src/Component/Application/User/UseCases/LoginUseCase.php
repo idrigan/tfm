@@ -29,6 +29,11 @@ class LoginUseCase
         $date = new \DateTime();
         $date->format("Y-m-d H:i:s");
 
+
+        if (!filter_var($userDTO->getEmail(),FILTER_VALIDATE_EMAIL)){
+            return FALSE;
+        }
+
         if ($user == null){
 
             $user = new User($userDTO->getEmail(),$userDTO->getNick(),$date);

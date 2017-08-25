@@ -1383,7 +1383,7 @@ jQuery.support = ( function() {
 	a.style.cssText = "top:1px;float:left;opacity:.5";
 	support = {
 
-		// Test setAttribute on camelCase class. If it works, we need attrFixes when doing get/setAttribute (ie6/7)
+		// Tests setAttribute on camelCase class. If it works, we need attrFixes when doing get/setAttribute (ie6/7)
 		getSetAttribute: div.className !== "t",
 
 		// IE strips leading whitespace when .innerHTML is used
@@ -1687,7 +1687,7 @@ function internalData( elem, name, data, pvt /* Internal Use Only */ ) {
 		// First Try to find as-is property data
 		ret = thisCache[ name ];
 
-		// Test for null|undefined property data
+		// Tests for null|undefined property data
 		if ( ret == null ) {
 
 			// Try to find the camelCased property
@@ -4201,7 +4201,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 		div.innerHTML = "<a name='" + expando + "'></a><div name='" + expando + "'></div>";
 		docElem.insertBefore( div, docElem.firstChild );
 
-		// Test
+		// Tests
 		var pass = doc.getElementsByName &&
 
 			// buggy browsers will return fewer than the correct 2

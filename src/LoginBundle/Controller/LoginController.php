@@ -13,8 +13,11 @@ use Symfony\Component\HttpFoundation\Request;
 class LoginController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
+
+        $session = $request->getSession();
+
         $oauth = $this->get('login.oauth');
 
         return $this->render('@LoginBundle/Resources/views/login.html.twig', [

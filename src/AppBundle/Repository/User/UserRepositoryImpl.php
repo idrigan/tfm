@@ -24,4 +24,19 @@ class UserRepositoryImpl extends EntityRepository implements UserRepository
             array('email' => $email)
         );
     }
+
+    public function create(User $user)
+    {
+        // TODO: Implement create() method.
+    }
+
+    public function update($idUser, $nick, $date)
+    {
+        // TODO: Implement update() method.
+    }
+
+    public function getById($idUser)
+    {
+        // TODO: Implement getById() method.
+    }
 }
