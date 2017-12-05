@@ -30,8 +30,9 @@ class Oauth implements InterfaceOAuth
 
 
         //TODO: get parameter
-        $url = 'http://box.example.com:8000/login/check-google';
-
+       // $url = 'http://box.example.com:8000/login/check-google';
+        //  $url = "http://tfm-red-social-musical.tk/";
+	$url = "http://ec2-34-250-163-229.eu-west-1.compute.amazonaws.com/login/check-google";
         $this->client->setRedirectUri($url);
 
     }

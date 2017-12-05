@@ -73,7 +73,7 @@ class FriendsEventSubscriber implements EventSubscriberInterface
                                 <tr>
                                      <td align="center" style="vertical-align: middle;min-height:400px;">
  
-                                        <img src="http://192.168.1.50:8000/images/img-email.png" alt="TFM - RED SOCIAL" width="100%"  style="display: block;" />
+                                        <img src="http://ec2-34-250-163-229.eu-west-1.compute.amazonaws.com/images/img-email.png" alt="TFM - RED SOCIAL" width="100%"  style="display: block;" />
                                      
                                      </td>
                                 </tr>
@@ -84,8 +84,8 @@ class FriendsEventSubscriber implements EventSubscriberInterface
                                         Hello!,<br><br>
                                         
                                         
-                                        You have received an invitation to join the social network, please click on the following link:<br><br<
-                                        <a href="http://box.example.com:8000/">TFM - RED SOCIAL</a>
+                                        You have received an invitation to join the social network, please click on the following link:<br><br>
+                                        <a href="http://ec2-34-250-163-229.eu-west-1.compute.amazonaws.com">TFM - RED SOCIAL</a>
                                         
                                         <br><br>
                                         Thank you !!

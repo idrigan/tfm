@@ -8,7 +8,7 @@ framework:
     profiler: { only_exceptions: false }
     cache:
           app: cache.adapter.redis
-          default_redis_provider: redis://192.168.1.50
+          default_redis_provider: redis://127.0.0.1
 
 web_profiler:
     toolbar: true

@@ -22,9 +22,10 @@ class CommentRepositoryImpl extends EntityRepository implements CommentRepositor
     {
 
         $friends = $this->getFriends($idUser);
+
         $users = array();
         foreach ($friends as $f) {
-            $users[] = $f['id_user'];
+            $users[] = isset($f['id_user']) ? $f['id_user'] : $f['id_user_friend'];
         }
         $users[] = $idUser;
 

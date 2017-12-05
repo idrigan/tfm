@@ -73,13 +73,7 @@ class LoginController extends Controller
     private function createUpdateUser(UserDTO $userDTO)
     {
         $loginUseCase = $this->get('app.user.usecase.loginusecase');
-
+		
         return $loginUseCase->execute($userDTO);
-
-
-
-
     }
-
-
 }

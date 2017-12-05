@@ -27,6 +27,7 @@ class CreateUserUseCase
         $date = new DateTime();
         $date->format("Y-m-d H:i:s");
         $user = new User($userDTO->getEmail(),$date);
+#	var_dump($user);exit();
         $this->repository->create($user);
 
 

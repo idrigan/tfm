@@ -61,7 +61,7 @@ class ContactEventSubscriber implements EventSubscriberInterface
                                 <tr>
                                      <td align="center" style="vertical-align: middle;min-height:400px;">
  
-                                        <img src="http://192.168.1.50:8000/images/img-email.png" alt="TFM - RED SOCIAL" width="100%"  style="display: block;" />
+                                        <img src="http://ec2-34-250-163-229.eu-west-1.compute.amazonaws.com/images/img-email.png" alt="TFM - RED SOCIAL" width="100%"  style="display: block;" />
                                      
                                      </td>
                                 </tr>

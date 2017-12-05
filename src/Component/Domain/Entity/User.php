@@ -28,10 +28,11 @@ class User
     private $nick;
 
 
-    public function __construct($email,$dateCreate)
+    public function __construct($email,$nick,$dateCreate)
     {
        $this->email  = $email;
        $this->dateCreate = $dateCreate;
+       $this->nick = $nick;
     }
 
     /**
