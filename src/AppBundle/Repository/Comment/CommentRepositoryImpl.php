@@ -20,16 +20,21 @@ class CommentRepositoryImpl extends EntityRepository implements CommentRepositor
 
     public function getAll($idUser)
     {
-
+	
         $friends = $this->getFriends($idUser);
 
         $users = array();
         foreach ($friends as $f) {
             $users[] = isset($f['id_user']) ? $f['id_user'] : $f['id_user_friend'];
         }
-        $users[] = $idUser;
+	if (!empty($idUser)){
+       	 $users[] = $idUser;
+	}
+        $result = array();
 
-        $result = $this->getComments($users);
+	if (count($users) > 0){
+        	$result = $this->getComments($users);
+	}
         return $result;
 
     }
@@ -53,6 +58,7 @@ class CommentRepositoryImpl extends EntityRepository implements CommentRepositor
 
 
     private function  getComments($users){
+       	
         $users = join(",",$users);
         $sql = " SELECT p.*,u.email FROM publication p
                 LEFT JOIN user u ON p.id_user = u.id

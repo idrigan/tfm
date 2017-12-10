@@ -20,7 +20,7 @@ class Oauth implements InterfaceOAuth
     private $rootDirClientSecrets;
 
 
-    public function __construct($rootDirClientSecrets)
+    public function __construct($rootDirClientSecrets,$url)
     {
         $this->client = new Google_Client();
 
@@ -28,19 +28,13 @@ class Oauth implements InterfaceOAuth
 
         $this->config();
 
-
-        //TODO: get parameter
-       // $url = 'http://box.example.com:8000/login/check-google';
-        //  $url = "http://tfm-red-social-musical.tk/";
-	$url = "http://ec2-34-250-163-229.eu-west-1.compute.amazonaws.com/login/check-google";
         $this->client->setRedirectUri($url);
 
     }
 
     public function config()
     {
-
-        try{
+                try{
             $this->client->setAuthConfig($this->rootDirClientSecrets);
 
             $this->client->setAccessType("offline");
@@ -78,6 +72,7 @@ class Oauth implements InterfaceOAuth
     {
         $this->client->authenticate($response);
 
+	
         if (null == $this->client->getAccessToken()) {
             return null;
 

@@ -21,8 +21,6 @@ class HomeController extends BaseController
 
         $this->spotify = $this->get('Api.musical');
 
-        $tokenSpotify = $this->spotify->getToken();
-
         $user = array(
             'picture'=>$request->getSession()->get('picture'),
             'name'=>$request->getSession()->get('name'),
@@ -30,7 +28,7 @@ class HomeController extends BaseController
         );
 
         if ($this->user == null){
-            return $this->redirect('/');
+	        return $this->redirect('/');
         }
 
         $getCommentUseCase = $this->get('app.comment.usecase.getAll');

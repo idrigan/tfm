@@ -1,9 +1,19 @@
 
 services:
-    api.musical:
-       class:  AppBundle\Api\ApiMusical
-       arguments:
-          container: '@service_container'
+
+    #redis
+    app.redis:
+       class:  Predis\Client
+
+    app.factorySpotify:
+      class: AppBundle\Api\SpotifyFactory
+
+
+    app.musical:
+      class:  AppBundle\Api\ApiMusical
+      factory: ['@app.factorySpotify',createSpotifyFactory]
+
+
 
     app.comment.usecase.save:
       class: Component\Application\Comment\UseCases\SaveCommentUseCase
@@ -62,5 +72,5 @@ services:
        class: AppBundle\Api\ApiMusicalDecorator
        public: false
        decorates: api.musical
-       arguments:
-          container: '@service_container'
+       arguments: ['@app.decorator.api.musical.inner','@app.redis']
+

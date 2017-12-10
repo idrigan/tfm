@@ -5,48 +5,27 @@ namespace AppBundle\Api;
 
 
 use Component\Application\Api\InterfaceMusical;
-use SpotifyWebAPI;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
 class ApiMusical implements InterfaceMusical
 {
     private $spotifySession;
-    private $apiSpotify;
+
 
     public function __construct(ContainerInterface $container)
     {
-        $this->apiSpotify = new SpotifyWebAPI\SpotifyWebAPI();
+        $spotify = $container->get('app.factorySpotify')->createSpotifyFactory($container->getParameter('client_id'),$container->getParameter('client_secret'));
 
-        $this->spotifySession = new SpotifyWebAPI\Session(
-            $container->getParameter('client_id'),//client id
-            $container->getParameter('client_secret')//client secret
-//            $container->  getParameter('url')
-        );
-
-        $this->spotifySession->requestCredentialsToken();
-        $token = $this->spotifySession->getAccessToken();
-
-        $this->apiSpotify->setAccessToken($token);
+        $this->apiSpotify = $spotify->getSpotifyApi();
 
 
     }
 
     public function search($value,$limit = 10,$offset = 0){
-        $this->getRefreshToken();
+        //$this->getRefreshToken();
         return $this->apiSpotify->search($value,array("artist","album","playlist","track"),array('limit'=>$limit,'offset'=>$offset));
     }
 
 
-    public function getToken(){
-        return $this->spotifySession->getAccessToken();
-    }
-
-    private function getRefreshToken(){
-        $refreshToken = $this->spotifySession->getRefreshToken();
-        $this->spotifySession->refreshAccessToken($refreshToken);
-        $accessToken = $this->spotifySession->getAccessToken();
-        $this->apiSpotify->setAccessToken($accessToken);
-
-    }
 }

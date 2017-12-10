@@ -8,7 +8,8 @@ services:
        class:  LoginBundle\Oauth\Oauth
        arguments:
            rootDirClientSecrets: '%client_secrets%'
-
+           url: '%url_login%'
+           factory:
 
 
 #USECASES

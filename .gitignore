@@ -2,16 +2,10 @@
 /build/
 /phpunit.xml
 /var/*
-!/var/cache
 /var/cache/*
-!var/cache/.gitkeep
-!/var/logs
 /var/logs/*
-!var/logs/.gitkeep
-!/var/sessions
+.idea
 /var/sessions/*
-!var/sessions/.gitkeep
-!var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
 ./idea
