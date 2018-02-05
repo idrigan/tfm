@@ -1,0 +1,49 @@
+profile:
+  path: /personal-data
+  defaults: { _controller: \ProfileBundle\Controller\ProfileController::execute }
+  methods: [GET]
+
+friends:
+  path: /friends
+  defaults: { _controller: \ProfileBundle\Controller\FriendsController::execute }
+  methods: [GET]
+
+searchfriends:
+  path: /friends/search
+  defaults: { _controller: \ProfileBundle\Api\FriendsController::search }
+  methods: [POST]
+
+add-search-friends:
+  path: /friends/add/{idUserFriend}
+  defaults: { _controller: \ProfileBundle\Api\FriendsController::add }
+  methods: [GET,POST]
+
+cancel-friends:
+  path: /friends/cancel-friend/{idUserFriend}
+  defaults: {_controller: \ProfileBundle\Api\FriendsController::cancel }
+  methods: [POST]
+
+musical-taste:
+  path: /musical-tastes
+  defaults: { _controller: \ProfileBundle\Controller\MusicalTastesController::execute }
+  methods: [GET]
+
+save-musical-taste:
+  path: /musical-tastes
+  defaults: { _controller: \ProfileBundle\Controller\MusicalTastesController::save }
+  methods: [POST]
+
+contact:
+  path: /contact
+  defaults: { _controller: \ProfileBundle\Controller\ContactController::execute }
+  methods: [GET]
+
+send-contact:
+  path: /send-contact
+  defaults: { _controller: \ProfileBundle\Controller\ContactController::send }
+  methods: [POST]
+
+send-invitation:
+  path: /friends/send-invitation
+  defaults: { _controller: \ProfileBundle\Api\SendInvitationController::execute }
+  methods: [POST]

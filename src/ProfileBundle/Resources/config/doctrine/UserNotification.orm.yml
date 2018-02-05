@@ -1,0 +1,42 @@
+Component\Domain\Entity\UserNotification:
+    type: entity
+    table: user_notification
+    indexes:
+        fk_user_notification_user_idx:
+            columns:
+                - user_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        title:
+            type: string
+            nullable: false
+            length: 200
+            options:
+                fixed: false
+        description:
+            type: text
+            nullable: true
+            length: 65535
+            options:
+                fixed: false
+        date:
+            type: datetime
+            nullable: false
+        read:
+            type: boolean
+            nullable: false
+        userId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            column: user_id
+    lifecycleCallbacks: {  }

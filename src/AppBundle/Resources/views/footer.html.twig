@@ -1,0 +1,79 @@
+{% block javascripts %}
+
+    <script>
+        $(document).ready(function(){
+
+            $("#search").on("focus",function(e){
+                var search = $(this).val();
+                if (search.length > 0){
+                    $("#resultados-spotiy").show();
+                }
+            });
+
+            $("#search").on("input",function(e){
+
+                var search = $(this).val();
+
+                if (search.length >= 3){
+                    Spotify.search(search);
+                }else{
+                    $("#resultados-spotiy").hide();
+                }
+
+            });
+
+            $("main").on("click",function(e){
+                $("#resultados-spotiy").hide();
+            });
+
+
+        });
+
+        function selectedSong(idTrack,name, uri){
+            var contenedor = document.getElementById("contenedor-track");
+            contenedor.innerHTML = "";
+            console.log(name);
+            console.log(idTrack);
+            var label = document.createElement("label");
+            label.innerHTML = "Song: " + name;
+            contenedor.appendChild(label);
+            var resultados = document.getElementById("resultados-spotiy");
+            resultados.setAttribute("style","display:none;");
+            var trackId = document.getElementById("track-id");
+            trackId.value = idTrack;
+            var type = document.getElementById("type-spoty");
+            type.value = "TRACK";
+            var url = document.getElementById("url-spoty");
+            url.value = uri;
+
+        }
+
+        function showFriendsNotifications(){
+            var friendsNotifications ="{{ notificationsFriends.friends | escape | json_encode()  }}";
+            friendsNotifications = JSON.parse(friendsNotifications.replace(/&quot;/g,'"'));
+            Friends.renderNotifications(friendsNotifications);
+        }
+
+        function addMessage(element,idComment){
+            Spotify.addMessage(element,idComment);
+
+        }
+
+    </script>
+{% endblock %}
+{% block footer %}
+    <footer>
+        <div class="container" style="background-color:black;padding:10px;opacity:0.8">
+            <div class="col-md-12">
+                  <div class="row">
+                      <div class="col-md-4" style="color:white;">
+                          <span>TFM - Red Social de Música 2017</span>
+                      </div>
+                  </div>
+            </div>
+
+        </div>
+
+    </footer>
+
+{% endblock %}

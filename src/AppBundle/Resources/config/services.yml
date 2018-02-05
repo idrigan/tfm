@@ -1,0 +1,73 @@
+
+services:
+
+    #redis
+    app.redis:
+       class:  Predis\Client
+
+    app.factorySpotify:
+      class: AppBundle\Api\SpotifyFactory
+
+    app.musical:
+      class:  AppBundle\Api\ApiMusical
+      factory: ['@app.factorySpotify',createSpotifyFactory]
+
+    app.comment.usecase.save:
+      class: Component\Application\Comment\UseCases\SaveCommentUseCase
+      arguments:
+          commentRepository: "@app.repository.comment"
+          entityManager: "@doctrine.orm.entity_manager"
+          dispatcher: "@event_dispatcher"
+
+    app.repository.comment:
+      class: AppBundle\Repository\Comment\CommentRepositoryImpl
+      arguments:
+        em:   '@doctrine.orm.entity_manager'
+        mapping: '@app.publication.metadata'
+
+    app.repository.response.comment:
+      class: AppBundle\Repository\Comment\SaveResponseCommentRepositoryImpl
+      arguments:
+        em:   '@doctrine.orm.entity_manager'
+        mapping: '@app.response.publication.metadata'
+
+    app.publication.metadata:
+       class: Doctrine\ORM\Mapping\ClassMetadata
+       factory_service: doctrine # this is an instance of Registry
+       factory_method: getRepository
+       arguments: [ Component\Domain\Entity\Publication ]
+
+    app.response.publication.metadata:
+        class: Doctrine\ORM\Mapping\ClassMetadata
+        factory_service: doctrine # this is an instance of Registry
+        factory_method: getRepository
+        arguments: [ Component\Domain\Entity\ResponsePublication ]
+
+    app.comment.usecase.getAll:
+      class: Component\Application\Comment\UseCases\GetCommentUseCase
+      arguments:
+        commentRepository: "@app.repository.comment"
+        entityManager: "@doctrine.orm.entity_manager"
+        dispatcher: "@event_dispatcher"
+
+    app.comment.usecase.getbyid:
+      class: Component\Application\Comment\UseCases\GetCommentByIdUseCase
+      arguments:
+        commentRepository: "@app.repository.comment"
+        entityManager: "@doctrine.orm.entity_manager"
+        dispatcher: "@event_dispatcher"
+
+    app.comment.save.response:
+      class: Component\Application\Comment\UseCases\SaveResponseCommentUseCase
+      arguments:
+        commentRepository: "@app.repository.response.comment"
+        entityManager: "@doctrine.orm.entity_manager"
+        dispatcher: "@event_dispatcher"
+
+#decorator
+    app.decorator.api.musical:
+       class: AppBundle\Api\ApiMusicalDecorator
+       public: false
+       decorates: app.musical
+       arguments: ['@app.decorator.api.musical.inner','@app.redis']
+

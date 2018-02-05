@@ -1,0 +1,52 @@
+parameters:
+    client_secrets: %kernel.root_dir%/Resources/client_secrets.json
+
+services:
+
+#GOOGLE AUTH
+    login.oauth:
+       class:  LoginBundle\Oauth\Oauth
+       arguments:
+           rootDirClientSecrets: '%client_secrets%'
+           url: '%url_login%'
+           factory:
+
+
+#USECASES
+#    #USER
+    app.user.usecase.createuser:
+       class:  Component\Application\User\UseCases\CreateUserUseCase
+       arguments:
+         userRepository: '@app.repository.user'
+         entityManager:  '@doctrine.orm.entity_manager'
+         dispatcher:     '@event_dispatcher'
+
+    app.user.usecase.updateuser:
+           class:  Component\Application\User\UseCases\UpdateUserUseCase
+           arguments:
+             userRepository: '@app.repository.user'
+             entityManager:  '@doctrine.orm.entity_manager'
+             dispatcher:     '@event_dispatcher'
+#
+    app.user.usecase.getuser:
+         class:  Component\Application\User\UseCases\GetUserUseCase
+         arguments:
+            userRepository: '@app.repository.user'
+            entityManager:  '@doctrine.orm.entity_manager'
+            dispatcher:     '@event_dispatcher'
+
+    app.user.usecase.loginusecase:
+        class: Component\Application\User\UseCases\LoginUseCase
+        arguments:
+            userRepository: '@app.repository.user'
+            entityManager:  '@doctrine.orm.entity_manager'
+            dispatcher:     '@event_dispatcher'
+#
+#
+#
+##REPOSITORY
+    app.repository.user:
+         class: LoginBundle\Repository\UserRepositoryImpl
+         arguments:
+              em:   '@doctrine.orm.entity_manager'
+              mapping: '@app.user.mentadata'

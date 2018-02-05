@@ -1,0 +1,61 @@
+{% extends 'ProfileBundle::template.html.twig' %}
+
+{% block container %}
+    <div class="row mt-2" >
+        <div class="col-md-12 text-center">
+            <h1>MY FRIENDS</h1>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-9 col-12 mb-1">
+                    <input type="text" value="" class="form-control" name="txtSeachFriends" placeholder="Search friends or Taste Musical" id="txtSearchFriends"/>
+                    <div class="row">
+                        <div class="col-md-12 " id="resultados" style="display: none;">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-12 mb-1 text-center">
+                    <input type="button" class="btn btn-primary" value="Search" onclick="searchFriends()"/>
+                </div>
+            </div>
+            <div class="row mt-4 pb-lg-4">
+                <div class="col-md-12 text-center">
+                    {% if friends|length == 0 %}
+                        <h2>Not items found</h2>
+                    {% endif %}
+                    {% for row in friends|batch(2) %}
+                        <div class="col-md-12 mt-4 pb-2 no-padding">
+                            <div class="row">
+                                {% for friend in row %}
+                                    <div class="col-md-6 col-sm-12 col-xs-12 mt-2" >
+
+                                        <div class="col-md-12" style="border: 1px solid lightgray;border-radius:15px;padding:10px">
+                                            <div class="row">
+                                                <div class="col-md-3 col-xs-12 text-center" style="padding-top:8px;padding-bottom:8px;">
+                                                    <div style="border:1px solid black;border-radius: 100%;overflow-x: hidden;width:60px;margin:0 auto;">
+                                                        <img src="{{ friend.image }} width="60px"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <span>{{ friend.email }}</span><br>
+                                                    <span style="font-size: 12px;">{{ friend.nick }}</span><br>
+                                                    <span class="font-weight-bold" style="font-size: 12px;" >{{ friend.date_create }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {%  endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

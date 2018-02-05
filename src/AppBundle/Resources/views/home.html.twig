@@ -1,0 +1,81 @@
+{% extends 'AppBundle::template.html.twig' %}
+
+{% block container %}
+    <div class="row" style="min-height: 700px;background-color: lightgray;">
+        <div class="col-md-12">
+            <form action="/save-comment" method="POST">
+                <div class="row mt-4">
+                    <div class="col-md-12" id="element-spotify">
+                        <input type="hidden" id="track-id" name="id" value="">
+                        <input type="hidden" id="type-spoty" name="type" value="">
+                        <input type="hidden" id="url-spoty" name="url" value="">
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group" style="margin-bottom: 0px;" >
+                            <textarea class="form-control" name="comment" rows="5" placeholder="Comment"></textarea>
+                        </div>
+                        <div id="contenedor-track">
+
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-right">
+                        <input type="submit" value="Submit" class="btn btn-primary">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-12" id="publications">
+
+            {% for row in comments %}
+
+                <div class="row flex-parent" style="border:1px solid darkgray;border-bottom:0px;padding:5px;min-height: 200px;margin-right: 0px;margin-left: 0px;">
+                    <div class="col-md-3 text-center flex-child " style="border-right:1px solid darkgray;">
+                        <div class="" style="border:1px solid black;border-radius: 100%;overflow-x: hidden;width:60px;margin:0 auto;">
+                            <img src="bundles/profile/img/user.png" width="60px">
+                        </div>
+
+                        <p style="font-size: 10px;font-weight: bold;margin-bottom:1px;"> {{ row.email }}</p>
+                        <p style="font-size: 10px;margin-bottom: 0px;"> {{ row.date|date('d/m/Y') }}</p>
+                    </div>
+                    <div class="col-md-9 ">
+                        {% if row.url is not empty %}
+                            <iframe  src="https://open.spotify.com/embed?uri={{ row.url }}" width="100%" height="80" frameborder="0" allowtransparency="true"></iframe>
+                        {% endif %}
+                        <label style="font-size:14px;width: 100%;overflow-y: auto;max-height:100px;margin-bottom: 0px;">{{ row.comment }}</label>
+                    </div>
+
+                </div>
+                <div class="col-md-12">
+
+                {% for response in row.responses %}
+
+                    <div class="row flex-parent text-center row-response">
+
+                            <div class="col-3 text-center flex-child no-padding-xs" style="border-right:1px solid darkgray;padding-top:5px;">
+                                <p style="font-size: 10px;font-weight: bold;margin-bottom:1px;"> {{ response.email }}</p>
+                                <p style="font-size: 10px;margin-bottom: 0px;"> {{ response.datecreate|date('d/m/Y') }}</p>
+
+                            </div>
+                            <div class="col-9 " style="padding-top:5px;text-align: left" >
+                                <div class="row no-padding">
+                                    <div class="col-12 no-padding-right">
+                                        <label class="lbl-response" id="lbl-response-{{ response.id }}">{{ response.content }}</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                     </div>
+
+                {% endfor %}
+
+        </div>
+                <div class="col-12 text-center mb-3" style="border:1px solid darkgray;padding: 5px;">
+                    <button class="btn btn-primary" style="font-size:12px;cursor: pointer;" onclick="addMessage(this,{{ row.id }});">Add answer</button>
+                </div>
+
+
+            {% endfor %}
+
+        </div>
+    </div>
+{% endblock %}

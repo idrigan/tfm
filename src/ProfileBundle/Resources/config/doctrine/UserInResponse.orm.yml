@@ -1,0 +1,54 @@
+Component\Domain\Entity\UserInResponse:
+    type: entity
+    table: user_in_response
+    indexes:
+        fk_user_in_response_response_publication1_idx:
+            columns:
+                - response_id
+        fk_user_in_response_publication1_idx:
+            columns:
+                - publication_id
+        fk_user_in_response_user1_idx:
+            columns:
+                - user_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: true
+            id: true
+            generator:
+                strategy: IDENTITY
+    manyToOne:
+        publication:
+            targetEntity: Publication
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                publication_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        response:
+            targetEntity: ResponsePublication
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                response_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        user:
+            targetEntity: User
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                user_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

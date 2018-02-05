@@ -1,0 +1,64 @@
+{% extends 'ProfileBundle::template.html.twig' %}
+
+{% block container %}
+    <div class="row mt-2" >
+        <div class="col-md-12 text-center">
+            <h1>MY DATA</h1>
+        </div>
+
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-12" >
+            <div class="row justify-content-md-center">
+                <div class="col-md-6 mb-4" style="border:1px solid lightgray;border-radius: 10px;">
+                    {% if errors is not empty %}
+                        <div class="col-md-12 text-center bg-danger text-white p-3 mt-3 mb-3 ">
+                            {{ errors }}
+                        </div>
+                    {% endif %}
+                    <div class="well well-sm">
+                        <form class="form-horizontal" action="/send-contact" method="post">
+
+                                <legend class="text-center">Contact us</legend>
+
+                                <!-- Name input-->
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label" for="name">Name</label>
+                                    <div class="col-md-12">
+                                        <input id="name" name="name" type="text" placeholder="Your name" value="{{  name }}" class="form-control">
+                                    </div>
+                                </div>
+
+                                <!-- Email input-->
+                                <div class="form-group">
+                                    <label class="col-md-12 control-label" for="email">Your E-mail</label>
+                                    <div class="col-md-12">
+                                        <input id="email" name="email" type="text" placeholder="Your email" value="{{ email }}" class="form-control">
+                                    </div>
+                                </div>
+
+                                <!-- Message body -->
+                                <div class="form-group">
+                                    <label class="col-md-12 control-label" for="message">Your message</label>
+                                    <div class="col-md-12">
+                                        <textarea class="form-control" id="message" name="message" placeholder="Please enter your message here..." rows="5">{{ message }}</textarea>
+                                    </div>
+                                </div>
+
+                                <!-- Form actions -->
+                                <div class="form-group">
+                                    <div class="col-md-12 text-right">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+

@@ -1,0 +1,117 @@
+
+services: 
+  api.musical: 
+    arguments: 
+      container: "@service_container"
+    class: AppBundle\Api\ApiMusical
+
+  app.user.usecase.friendsusecase:
+    class: Component\Application\User\UseCases\FriendsUseCase
+    arguments:
+      userRepository: "@app.repository.friends"
+      entityManager: "@doctrine.orm.entity_manager"
+      dispatcher: "@event_dispatcher"
+
+  app.user.usecase.friendsNotAcceptedusecase:
+      class: Component\Application\User\UseCases\FriendsNotAcceptedUseCase
+      arguments:
+        userRepository: "@app.repository.friends"
+        entityManager: "@doctrine.orm.entity_manager"
+        dispatcher: "@event_dispatcher"
+
+  app.user.usecase.searchfriendsusecase:
+      class: Component\Application\User\UseCases\SearchFriendsUseCase
+      arguments:
+        userRepository: "@app.repository.friends"
+        userMusicalRepository: "@app.repository.usermusicaltastes"
+        entityManager: "@doctrine.orm.entity_manager"
+        dispatcher: "@event_dispatcher"
+
+  app.user.usecase.addfriendusecase:
+    class: Component\Application\User\UseCases\AddFriendUseCase
+    arguments:
+        friendRepository: "@app.repository.friends"
+        userRepository: "@app.repository.user"
+        entityManager: "@doctrine.orm.entity_manager"
+        dispatcher: "@event_dispatcher"
+
+  app.user.usecase.cancelfriendusecase:
+    class: Component\Application\User\UseCases\CancelFriendUseCase
+    arguments:
+        friendRepository: "@app.repository.friends"
+        userRepository: "@app.repository.user"
+        entityManager: "@doctrine.orm.entity_manager"
+        dispatcher: "@event_dispatcher"
+
+  app.user.usecase.getallmusicaltastesusecase:
+    class: Component\Application\User\UseCases\GetAllMusicalTastesUseCase
+    arguments:
+      userRepository: "@app.repository.musicaltastes"
+      entityManager: "@doctrine.orm.entity_manager"
+      dispatcher: "@event_dispatcher"
+
+  app.user.usecase.getallmusicaltastesbyuserusecase:
+    class: Component\Application\User\UseCases\GetAllMusicalTastesByUserUseCase
+    arguments:
+      userRepository: "@app.repository.usermusicaltastes"
+      entityManager: "@doctrine.orm.entity_manager"
+      dispatcher: "@event_dispatcher"
+
+  app.user.usecase.searchfriendsmusicaltastesusecase:
+      class: Component\Application\User\UseCases\SearchFriendsByMusicalTastesUseCase
+      arguments:
+        userRepository: "@app.repository.usermusicaltastes"
+        entityManager: "@doctrine.orm.entity_manager"
+        dispatcher: "@event_dispatcher"
+
+  app.user.usecase.savemusicaltastesusecase:
+    class: Component\Application\User\UseCases\SaveMusicalTastesUseCase
+    arguments:
+      userMusicalRepository: "@app.repository.usermusicaltastes"
+      userRepository: "@app.repository.user"
+      musicalTasteRepository: "@app.repository.musicaltastes"
+      entityManager: "@doctrine.orm.entity_manager"
+      dispatcher: "@event_dispatcher"
+
+  app.repository.friends:
+    class: ProfileBundle\Repository\FriendsRepositoryImpl
+    arguments:
+      em: "@doctrine.orm.entity_manager"
+      mapping: "@app.friends.metadata"
+
+  app.repository.musicaltastes:
+    class: ProfileBundle\Repository\MusicalTastesRepositoryImpl
+    arguments:
+      em: "@doctrine.orm.entity_manager"
+      mapping: "@app.musicaltaste.metadata"
+
+  app.repository.usermusicaltastes:
+    class: ProfileBundle\Repository\UserMusicalTastesRepositoryImpl
+    arguments:
+      em: "@doctrine.orm.entity_manager"
+      mapping: "@app.musicaltasteuser.metadata"
+
+  app.repository.user:
+     class: LoginBundle\Repository\UserRepositoryImpl
+     arguments:
+          em:   '@doctrine.orm.entity_manager'
+          mapping: '@app.user.mentadata'
+
+  app.friends.metadata:
+      class: Doctrine\ORM\Mapping\ClassMetadata
+      factory_service: doctrine # this is an instance of Registry
+      factory_method: getRepository
+      arguments: [ Component\Domain\Entity\UserFriend ]
+
+  app.musicaltaste.metadata:
+      class: Doctrine\ORM\Mapping\ClassMetadata
+      factory_service: doctrine # this is an instance of Registry
+      factory_method: getRepository
+      arguments: [ Component\Domain\Entity\MusicalTaste ]
+
+  app.musicaltasteuser.metadata:
+      class: Doctrine\ORM\Mapping\ClassMetadata
+      factory_service: doctrine # this is an instance of Registry
+      factory_method: getRepository
+      arguments: [ Component\Domain\Entity\UserMusicalTaste ]
+
