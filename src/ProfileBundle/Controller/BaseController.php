@@ -15,7 +15,7 @@ class BaseController extends Controller
     protected function checkUser(Request $request)
     {
         $session = $request->getSession();
-
+//	var_dump($session);exit();	
         $token = $session->get('token');
 
         if (!is_array($token) || count($token)==0){

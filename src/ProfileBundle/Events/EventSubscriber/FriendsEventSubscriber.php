@@ -13,22 +13,14 @@ class FriendsEventSubscriber implements EventSubscriberInterface
     private  $mailer;
 
     public function __construct()
-    {
-        $this->mailer = new \Swift_SmtpTransport('mail.maleco.es',587);
-
-        $this->mailer->setUsername("maleco@maleco.es");
-        $this->mailer->setPassword("LWZOBKYolDxjMCt7G1PJ");
-        $this->mailer->setEncryption("tls");
-    }
+    {}
 
     public function sendInvitation(FriendsEvent $event){
-        //$event->getEmail();
         //SEND EMAIL
         $transport = new \Swift_SmtpTransport('mail.maleco.es',587);
 
         $transport->setUsername("maleco@maleco.es");
         $transport->setPassword("LWZOBKYolDxjMCt7G1PJ");
-      //  $transport->setEncryption("tls");
 
         $mailer = new \Swift_Mailer($transport);
 

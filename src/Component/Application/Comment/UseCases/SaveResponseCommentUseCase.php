@@ -24,7 +24,9 @@ class SaveResponseCommentUseCase
     public function execute(ResponseCommentDTO $response){
 
         try {
-
+            if (empty($response->getResponse())){
+                return FALSE;
+            }
             $responsePublication = new ResponsePublication();
             $responsePublication->setContent($response->getResponse());
 
@@ -40,7 +42,6 @@ class SaveResponseCommentUseCase
             $this->em->flush();
             return TRUE;
         }catch(\Exception $e){
-            echo $e->getMessage();exit();
             return FALSE;
         }
     }

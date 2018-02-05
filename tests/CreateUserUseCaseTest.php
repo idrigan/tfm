@@ -16,7 +16,7 @@ use LoginBundle\Repository\UserRepositoryImpl;
 class CreateUserUseCaseTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var SaveCommentUseCase
+     * @var UserMusicalTastesRepository
      */
     private $loginUseCase;
 

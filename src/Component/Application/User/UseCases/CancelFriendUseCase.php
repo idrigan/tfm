@@ -29,11 +29,13 @@ class CancelFriendUseCase
         $date->format("Y-m-d H:i:s");
 
         foreach ($friends as $row) {
-
+            if ($row->getId() == NULL){
+                return FALSE;
+            }
             //check exist User
             $friend = $this->userRepository->getById($row->getId());
 
-            if (empty($friend->getId())){
+            if (empty($friend->getId()) || $friend->getId() == NULL){
                 return FALSE;
             }
 

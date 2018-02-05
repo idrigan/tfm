@@ -4,7 +4,9 @@
 namespace Tests;
 
 
+use Component\Application\User\UseCases\CancelFriendUseCase;
 use Component\Domain\Entity\User;
+use Component\Domain\Repository\UserRepository;
 use LoginBundle\Repository\UserRepositoryImpl;
 use Component\Application\User\UseCases\AddFriendUseCase;
 use Component\Domain\DTO\UserFriendDTO;
@@ -12,12 +14,12 @@ use Doctrine\ORM\EntityManager;
 use ProfileBundle\Repository\FriendsRepositoryImpl;
 
 
-class AddFriendUseCaseTest extends \PHPUnit_Framework_TestCase
+class CancelFriendUseCaseTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var SaveCommentUseCase
      */
-    private $addFriendUseCase;
+    private $cancelFriendUseCase;
 
     /**
      * @var PHPUnit_Framework_MockObject_MockObject
@@ -40,10 +42,10 @@ class AddFriendUseCaseTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->useRepositoryMock = $this->createMock(UserRepositoryImpl::class);
+        $this->useRepositoryMock = $this->createMock(UserRepository::class);
         $this->friendRepositoryMock = $this->createMock(FriendsRepositoryImpl::class);
         $this->aEntityMock = $this->createMock(EntityManager::class);
-        $this->addFriendUseCase = new AddFriendUseCase($this->friendRepositoryMock,$this->useRepositoryMock,$this->aEntityMock);
+        $this->cancelFriendUseCase = new CancelFriendUseCase($this->friendRepositoryMock,$this->useRepositoryMock,$this->aEntityMock);
 
         $this->email = 'prueba@gmail.com';
         $this->idUser = 1;
@@ -56,28 +58,38 @@ class AddFriendUseCaseTest extends \PHPUnit_Framework_TestCase
         $this->commentUserCase = null;
         $this->friendRepositoryMock = null;
         $this->aEntityMock = null;
-        $this->addFriendUseCase = null;
+        $this->cancelFriendUseCase = null;
     }
 
     /**
      * @test
      *
      */
-    public function testAddFriendUseCase(){
+    public function testCancelFriendUseCase(){
         $userFriendDTO = new UserFriendDTO($this->idUser,TRUE);
 
         $userFriendDTO->setIdUser($this->idUserFriend);
 
-        $this->assertEquals($this->addFriendUseCase->execute($userFriendDTO),TRUE);
+        $this->assertEquals($this->cancelFriendUseCase->execute($userFriendDTO),TRUE);
     }
 
     /**
      * @test
      *
      */
-    public function testErrorAddFriendUseCase(){
+    public function testErrorCancelFriendUseCaseEmptyFriend(){
         $userFriendDTO = new UserFriendDTO($this->idUser,TRUE);
+        $userFriendDTO->addFriend(new User('','',null));
+        $this->assertEquals($this->cancelFriendUseCase->execute($userFriendDTO),FALSE);
+    }
+
+    /**
+     * @test
+     *
+     */
+    public function testErrorCancelFriendUseCaseEmptyUser(){
+        $userFriendDTO = new UserFriendDTO(null,TRUE);
         $userFriendDTO->addFriend(new User('prueba@gmail.cd','',null));
-        $this->assertEquals($this->addFriendUseCase->execute($userFriendDTO),FALSE);
+        $this->assertEquals($this->cancelFriendUseCase->execute($userFriendDTO),FALSE);
     }
 }

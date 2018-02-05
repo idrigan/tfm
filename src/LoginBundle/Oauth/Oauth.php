@@ -20,7 +20,7 @@ class Oauth implements InterfaceOAuth
     private $rootDirClientSecrets;
 
 
-    public function __construct($rootDirClientSecrets,$url)
+    public function __construct($rootDirClientSecrets, $url)
     {
         $this->client = new Google_Client();
 
@@ -34,7 +34,7 @@ class Oauth implements InterfaceOAuth
 
     public function config()
     {
-                try{
+        try {
             $this->client->setAuthConfig($this->rootDirClientSecrets);
 
             $this->client->setAccessType("offline");
@@ -44,8 +44,8 @@ class Oauth implements InterfaceOAuth
             $this->client->setScopes(array('https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile'));
 
             $this->oauth = new Google_Service_Oauth2($this->client);
-        }catch (Exception $e){
-           // echo $e->getMessage();
+        } catch (Exception $e) {
+            // echo $e->getMessage();
 
         }
 
@@ -72,7 +72,7 @@ class Oauth implements InterfaceOAuth
     {
         $this->client->authenticate($response);
 
-	
+
         if (null == $this->client->getAccessToken()) {
             return null;
 
@@ -80,8 +80,7 @@ class Oauth implements InterfaceOAuth
 
         $user = $this->oauth->userinfo_v2_me->get();
 
-        return  new UserDTO($user->email, $user->givenName." ".$user->familyName, $user->picture, $user->locale, $user->id);
-
+        return new UserDTO($user->email, $user->givenName . " " . $user->familyName, $user->picture, $user->locale, $user->id);
 
 
     }

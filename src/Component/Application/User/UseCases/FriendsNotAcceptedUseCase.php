@@ -21,19 +21,24 @@ class FriendsNotAcceptedUseCase
 
     public function execute(UserFriendDTO $userFriendDTO){
 
-        $friends = $this->repository->getFriendsByUserNoAccept($userFriendDTO->getIdUser());
-
-        foreach ($friends as $index=>$friend){
-            $email = isset($friend['email']) ? $friend['email'] : '';
-            if (empty($email)) continue;
-            $data = file_get_contents('http://picasaweb.google.com/data/entry/api/user/'.$email.'?alt=json');
-            $data = json_decode($data);
-            $avatar = $data->{'entry'}->{'gphoto$thumbnail'}->{'$t'};
-            $friends[$index]['image'] = $avatar;
-
+        if (empty($userFriendDTO->getIdUser())){
+            return FALSE;
         }
 
-        $userFriendDTO->setFriends($friends);
+        $friends = $this->repository->getFriendsByUserNoAccept($userFriendDTO->getIdUser());
+        if (count($friends) > 0) {
+            foreach ($friends as $index => $friend) {
+                $email = isset($friend['email']) ? $friend['email'] : '';
+                if (empty($email)) continue;
+                $data = file_get_contents('http://picasaweb.google.com/data/entry/api/user/' . $email . '?alt=json');
+                $data = json_decode($data);
+                $avatar = $data->{'entry'}->{'gphoto$thumbnail'}->{'$t'};
+                $friends[$index]['image'] = $avatar;
+
+            }
+            $userFriendDTO->setFriends($friends);
+        }
+
 
         return $userFriendDTO;
 

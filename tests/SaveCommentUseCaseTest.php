@@ -76,7 +76,7 @@ class SaveCommentUseCaseTest extends \PHPUnit_Framework_TestCase
      * @test
      *
      */
-    public function testSaveCommentEmptyComment(){
+    public function testSaveComment(){
 
         $commentDTO = new CommentDTO('',$this->user,$this->comment2,'','','');
 

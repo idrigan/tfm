@@ -23,22 +23,27 @@ class GetCommentUseCase
     }
 
     public function execute(UserDTO $userDTO){
+
+        if (empty($userDTO->getId()) || $userDTO->getId() == ''){
+            return FALSE;
+        }
+
         $comments =  $this->commentRepository->getAll($userDTO->getId());
 
 
 
         $commentsDTO = new CommentsDTO();
+        if ( count($comments ) > 0) {
+            foreach ($comments as $index => $comment) {
 
-        foreach ($comments as $index=>$comment){
 
+                $commentDTO = new CommentDTO($comment['id'], $comment['id_user'], $comment['content'], $comment['spotify_id'],
+                    $comment['spotify_url'], $comment['type_content'], $comment['email'], $comment['date_create']);
 
+                $commentDTO->setResponses($comment['responses']);
 
-            $commentDTO = new CommentDTO($comment['id'],$comment['id_user'],$comment['content'],$comment['spotify_id'],
-                $comment['spotify_url'],$comment['type_content'],$comment['email'],$comment['date_create']);
-
-            $commentDTO->setResponses($comment['responses']);
-
-            $commentsDTO->addComment($commentDTO);
+                $commentsDTO->addComment($commentDTO);
+            }
         }
 
         return $commentsDTO;

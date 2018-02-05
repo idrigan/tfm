@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 
 namespace ProfileBundle\Events\EventSubscriber;
@@ -9,9 +9,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ContactEventSubscriber implements EventSubscriberInterface
 {
-
-    public function __construct()
-    {}
 
     public function sendContact(ContactEvent $event){
 

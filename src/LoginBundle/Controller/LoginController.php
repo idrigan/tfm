@@ -33,11 +33,12 @@ class LoginController extends Controller
         $oauth = $this->get('login.oauth');
 
         $user = $this->authenticate($oauth, $request->query->get('code'));
-
+	
         if (null == $user) {
+
             return $this->redirect('/');
         }
-
+      
         $session = $request->getSession();
 
         $session->set("token", $this->getToken($oauth));
@@ -49,8 +50,8 @@ class LoginController extends Controller
         foreach ($message as $index => $value){
             $session->set($index,$value);
         }
-
-        return new RedirectResponse($response->getUrl());
+		
+	return new RedirectResponse($response->getUrl());
 
     }
 

@@ -8,12 +8,9 @@ services:
     app.factorySpotify:
       class: AppBundle\Api\SpotifyFactory
 
-
     app.musical:
       class:  AppBundle\Api\ApiMusical
       factory: ['@app.factorySpotify',createSpotifyFactory]
-
-
 
     app.comment.usecase.save:
       class: Component\Application\Comment\UseCases\SaveCommentUseCase
@@ -71,6 +68,6 @@ services:
     app.decorator.api.musical:
        class: AppBundle\Api\ApiMusicalDecorator
        public: false
-       decorates: api.musical
+       decorates: app.musical
        arguments: ['@app.decorator.api.musical.inner','@app.redis']
 

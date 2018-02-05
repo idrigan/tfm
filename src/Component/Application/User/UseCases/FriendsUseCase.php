@@ -21,19 +21,24 @@ class FriendsUseCase
 
     public function execute(UserFriendDTO $userFriendDTO){
 
+        if (empty($userFriendDTO->getIdUser())){
+            return FALSE;
+        }
+
        $friends = $this->repository->getFriendsByUser($userFriendDTO->getIdUser());
+        if (count($friends) > 0) {
+            foreach ($friends as $index => $friend) {
+                $email = isset($friend['email']) ? $friend['email'] : '';
+                if (empty($email)) continue;
+                $data = file_get_contents('http://picasaweb.google.com/data/entry/api/user/' . $email . '?alt=json');
+                $data = json_decode($data);
+                $avatar = $data->{'entry'}->{'gphoto$thumbnail'}->{'$t'};
+                $friends[$index]['image'] = $avatar;
 
-       foreach ($friends as $index=>$friend){
-           $email = isset($friend['email']) ? $friend['email'] : '';
-           if (empty($email)) continue;
-           $data = file_get_contents('http://picasaweb.google.com/data/entry/api/user/'.$email.'?alt=json');
-           $data = json_decode($data);
-           $avatar = $data->{'entry'}->{'gphoto$thumbnail'}->{'$t'};
-           $friends[$index]['image'] = $avatar;
+            }
 
-       }
-
-        $userFriendDTO->setFriends($friends);
+            $userFriendDTO->setFriends($friends);
+        }
 
         return $userFriendDTO;
 

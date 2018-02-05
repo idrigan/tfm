@@ -16,8 +16,6 @@ class SendInvitationController extends BaseController
         $json = json_decode($request->getContent(), true);
         $email =   $json['value'];
 
-        //$email = "idrigan@gmail.com";
-
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
             return new Response(json_encode(array("response"=>"OK","data"=>("The email is not valid"))));
         }

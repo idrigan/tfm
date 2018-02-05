@@ -23,15 +23,20 @@ class GetAllMusicalTastesUseCase
 
     public function execute($idUser){
 
+        if (empty($idUser) || $idUser == null){
+            return FALSE;
+        }
+
         $musicalTastesDTO = new MusicalTastesDTO();
+        if (count($this->repository->getAllMusicalTastes($idUser))) {
+            foreach ($this->repository->getAllMusicalTastes($idUser) as $element) {
 
-        foreach ($this->repository->getAllMusicalTastes($idUser) as $element){
+                $musicalTaste = new MusicalTaste($element['id'], $element['name'], $element['description']);
 
-            $musicalTaste = new MusicalTaste($element['id'],$element['name'],$element['description']);
+                $musicalTasteDTO = new MusicalTasteDTO($musicalTaste, $element['b_checked']);
 
-            $musicalTasteDTO = new MusicalTasteDTO($musicalTaste,$element['b_checked']);
-
-            $musicalTastesDTO->addMusicalTaste($musicalTasteDTO);
+                $musicalTastesDTO->addMusicalTaste($musicalTasteDTO);
+            }
         }
         return $musicalTastesDTO;
     }

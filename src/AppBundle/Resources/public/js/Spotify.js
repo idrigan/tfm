@@ -32,7 +32,6 @@
             return xhr.responseText;
         },
         renderResult: function renderResult(result,val){
-            console.log(result);
             if (result == null){
                 return;
             }
@@ -44,48 +43,7 @@
             var contenedor = document.getElementById("resultados-spotiy");
             contenedor.innerHTML = "";
 
-           /*  var divCol = document.createElement("div");
-             divCol.className = "col-md-12 text-center";
-             divCol.setAttribute("style","color: white;padding: 10px;font-weight: bold;");
-                var label = document.createElement("label");
-                label.innerHTML = "Albums";
-                divCol.appendChild(label);
-            contenedor.appendChild(divCol);
-
-            this.renderAlbums(albums);
-
-            var divCol = document.createElement("div");
-            divCol.className = "col-md-12 text-center";
-            divCol.setAttribute("style","color: white;padding: 10px;font-weight: bold;");
-            var label = document.createElement("label");
-            label.innerHTML = "Artists";
-            divCol.appendChild(label);
-
-            contenedor.appendChild(divCol);
-
-            this.renderArtists(artists);
-            */
-
-           /*var divCol = document.createElement("div");
-            divCol.className = "col-md-12 text-center";
-            divCol.setAttribute("style","color: white;padding: 10px;font-weight: bold;");
-            var label = document.createElement("label");
-            label.innerHTML = "Songs";
-            divCol.appendChild(label);
-
-            contenedor.appendChild(divCol);*/
-            console.log(this);
             Spotify.renderTracks(tracks);
-
-           /* var divCol = document.createElement("div");
-            divCol.className = "col-md-12 mb-1 text-center";
-            var a =document.createElement("a");
-            a.setAttribute("style","width:100%");
-            a.href="/api/spotify/search-more?val="+val;
-            divCol.innerHTML = "More...";
-            divCol.setAttribute("style","padding: 5px;font-size: 14px;");
-            a.appendChild(divCol);
-            contenedor.appendChild(a);*/
 
             if (albums.length > 0 || artists.length > 0 || playlists.length > 0 || tracks.length > 0){
                 $("#resultados-spotiy").show();
@@ -97,13 +55,13 @@
 
             var contenedor = document.getElementById("resultados-spotiy");
             $.each(albums,function(key,album){
-                //console.log(album);
+
                 if (key >= 10){
                     return;
                 }
                 var divCol = document.createElement("div");
                 divCol.className = "col-md-12 mb-2";
-                divCol.setAttribute("onclick","add("+JSON.stringify(album)+")");
+                divCol.setAt  tribute("onclick","add("+JSON.stringify(album)+")");
                 var divRow = document.createElement("div");
                 divRow.className = "row row-result";
                 var divColImg = document.createElement("div");

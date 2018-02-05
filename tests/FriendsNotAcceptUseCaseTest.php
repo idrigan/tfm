@@ -4,6 +4,7 @@
 namespace Tests;
 
 
+use Component\Application\User\UseCases\FriendsNotAcceptedUseCase;
 use Component\Domain\Entity\User;
 use LoginBundle\Repository\UserRepositoryImpl;
 use Component\Application\User\UseCases\AddFriendUseCase;
@@ -12,17 +13,13 @@ use Doctrine\ORM\EntityManager;
 use ProfileBundle\Repository\FriendsRepositoryImpl;
 
 
-class AddFriendUseCaseTest extends \PHPUnit_Framework_TestCase
+class FriendsNotAcceptUseCaseTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var SaveCommentUseCase
      */
-    private $addFriendUseCase;
+    private $friendsNotAcceptedUseCase;
 
-    /**
-     * @var PHPUnit_Framework_MockObject_MockObject
-     */
-    private $useRepositoryMock;
 
     /**
      * @var PHPUnit_Framework_MockObject_MockObject
@@ -34,50 +31,45 @@ class AddFriendUseCaseTest extends \PHPUnit_Framework_TestCase
      */
     private $aEntityMock;
 
-    private $email;
     private $idUser;
+
     private $idUserFriend;
 
     protected function setUp()
     {
-        $this->useRepositoryMock = $this->createMock(UserRepositoryImpl::class);
         $this->friendRepositoryMock = $this->createMock(FriendsRepositoryImpl::class);
         $this->aEntityMock = $this->createMock(EntityManager::class);
-        $this->addFriendUseCase = new AddFriendUseCase($this->friendRepositoryMock,$this->useRepositoryMock,$this->aEntityMock);
+        $this->friendsNotAcceptedUseCase = new FriendsNotAcceptedUseCase($this->friendRepositoryMock,$this->aEntityMock);
 
-        $this->email = 'prueba@gmail.com';
         $this->idUser = 1;
         $this->idUserFriend = 2;
     }
 
     protected function tearDown()
     {
-        $this->userRepositoryMock = null;
-        $this->commentUserCase = null;
         $this->friendRepositoryMock = null;
         $this->aEntityMock = null;
-        $this->addFriendUseCase = null;
+        $this->friendsNotAcceptedUseCase = null;
     }
 
     /**
      * @test
      *
      */
-    public function testAddFriendUseCase(){
+    public function testFriendsNotAcceptdUseCase(){
         $userFriendDTO = new UserFriendDTO($this->idUser,TRUE);
 
         $userFriendDTO->setIdUser($this->idUserFriend);
 
-        $this->assertEquals($this->addFriendUseCase->execute($userFriendDTO),TRUE);
+        $this->assertSame(UserFriendDTO::class, get_class($this->friendsNotAcceptedUseCase->execute($userFriendDTO)));
     }
 
     /**
      * @test
      *
      */
-    public function testErrorAddFriendUseCase(){
-        $userFriendDTO = new UserFriendDTO($this->idUser,TRUE);
-        $userFriendDTO->addFriend(new User('prueba@gmail.cd','',null));
-        $this->assertEquals($this->addFriendUseCase->execute($userFriendDTO),FALSE);
+    public function testErrorFriendsNotAcceptUseCase(){
+        $userFriendDTO = new UserFriendDTO(NULL,TRUE);
+        $this->assertEquals($this->friendsNotAcceptedUseCase->execute($userFriendDTO),FALSE);
     }
 }

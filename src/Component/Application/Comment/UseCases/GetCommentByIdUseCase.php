@@ -21,6 +21,11 @@ class GetCommentByIdUseCase
     }
 
     public function execute(CommentDTO $commentDTO){
+
+        if (empty($commentDTO->getId()) || $commentDTO->getId() == ''){
+            return FALSE;
+        }
+
         return $this->commentRepository->getById($commentDTO->getId());
 
     }
